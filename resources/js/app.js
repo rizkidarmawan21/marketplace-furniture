@@ -2,6 +2,7 @@ import './bootstrap';
 import "jsvectormap/dist/css/jsvectormap.css";
 import "flatpickr/dist/flatpickr.min.css";
 import "../css/satoshi.css";
+import "../css/quicksand.css";
 import "../css/app.css";
 
 import Alpine from "alpinejs";

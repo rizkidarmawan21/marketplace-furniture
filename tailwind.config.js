@@ -21,6 +21,7 @@ export default {
     theme: {
         fontFamily: {
             satoshi: ['Satoshi', 'sans-serif'],
+            quicksand: ['Quicksand', 'sans-serif'],
         },
         screens: {
             '2xsm': '375px',
@@ -40,6 +41,7 @@ export default {
                 bodydark1: '#DEE4EE',
                 bodydark2: '#8A99AF',
                 primary: '#3C50E0',
+                feprimary: '#C6B38D',
                 secondary: '#80CAEE',
                 stroke: '#E2E8F0',
                 gray: '#EFF4FB',

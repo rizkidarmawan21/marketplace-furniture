@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-dashboard-layout>
     <div x-data="{
         modalCreate: false,
         confirmDesc: 'Are you sure you want to delete this data? after deleting data you cannot restore it back',
@@ -107,4 +107,4 @@
         @include('pages.users.modal-create')
         @include('partials.confirm')
     </div>
-</x-app-layout>
+</x-dashboard-layout>
