@@ -1,7 +1,7 @@
-<div class="flex justify-center mx-52 mt-10">
+<div class="flex justify-center lg:mx-52 mt-10">
     {{-- Carousel Banner --}}
 
-    <div class="container">
+    <div class="w-[90%] lg:container">
         <div x-data="carousel()" x-init="init()" class="overflow-hidden relative rounded-2xl">
             <div x-ref="carousel" class="flex transition-transform ease-in-out duration-1000"
                 x-bind:style="'width: ' + slides.length * 100 + '%; transform: translateX(-' + curr * (100 / slides.length) + '%)'">

@@ -1,5 +1,5 @@
-<header class="flex justify-center mx-52">
-    <div class="container py-5 flex justify-between items-center">
+<header class="flex justify-center lg:mx-52">
+    <div class="w-[90%] lg:container py-5 flex justify-between items-center">
         <h1>
             Logo
         </h1>

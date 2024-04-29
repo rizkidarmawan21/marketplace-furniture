@@ -307,5 +307,5 @@ export default {
         },
     },
 
-    plugins: [forms],
+    plugins: [forms, require('@tailwindcss/line-clamp')],
 };
