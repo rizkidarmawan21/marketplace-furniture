@@ -18,7 +18,8 @@
                 <div class="w-[50%] h-full flex flex-col items-center ">
                     <div class="image-product w-full h-full flex items-center justify-center zoom-container">
                         <img src="https://mjsfurniture.com/wp-content/uploads/2021/01/Sofa-Modern-Minimalis-Kayu-Solid-Jepara.jpg"
-                            alt="" class="w-full !h-[400px] rounded-xl object-cover !shadow-none xzoom"
+                            alt=""
+                            class="w-full h-full lg:!h-[500px] rounded-xl object-cover !shadow-none xzoom"
                             id="xzoom-default"
                             xoriginal="https://mjsfurniture.com/wp-content/uploads/2021/01/Sofa-Modern-Minimalis-Kayu-Solid-Jepara.jpg">
                     </div>
@@ -59,7 +60,13 @@
                     <h1 class="text-4xl text-black font-medium">
                         Aerozen Shower Toilet
                     </h1>
-                    <p class="my-4">
+                    <p class="mb-2 mt-3 flex gap-3">
+                        <span class="text-lg">Kategori</span>
+                        <a href="" class="text-feprimary">
+                            <span class="text-lg">Kamar Mandi</span>
+                        </a>
+                    </p>
+                    <p class="">
                         Terjual 1723
                     </p>
                     <div class="my-8">
@@ -68,9 +75,9 @@
                             <span class="text-sm !text-black">/ Unit</span>
                         </h2>
                     </div>
-                    <div class="my-8">
+                    <div class="my-8 flex gap-5">
                         <p class="mb-2 text-lg">
-                            Kategori
+                            Tipe
                         </p>
                         <div class="flex flex-wrap gap-2">
                             {{-- breadcum category --}}
@@ -97,9 +104,24 @@
                                     <span class="text-sm">Tipe D</span>
                                 </div>
                             </a>
+                            <a href="">
+                                <div class="px-5 py-1 bg-feprimary max-w-max rounded-md text-white">
+                                    <span class="text-sm">Tipe D</span>
+                                </div>
+                            </a>
+                            <a href="">
+                                <div class="px-5 py-1 bg-feprimary max-w-max rounded-md text-white">
+                                    <span class="text-sm">Tipe D</span>
+                                </div>
+                            </a>
+                            <a href="">
+                                <div class="px-5 py-1 bg-feprimary max-w-max rounded-md text-white">
+                                    <span class="text-sm">Tipe D</span>
+                                </div>
+                            </a>
                         </div>
                     </div>
-                    <div class="my-8">
+                    <div class="my-8 flex gap-5">
                         <p class="mb-2 text-lg">
                             Kuantitas
                         </p>
@@ -169,5 +191,6 @@
         </div>
     </div>
 
+    @include('partials.main.products.releated-category')
     @include('partials.main.footer')
 </x-app-layout>

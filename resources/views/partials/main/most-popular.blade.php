@@ -14,7 +14,7 @@
                     Lihat Selanjutnya
                 </a>
             </div>
-        </div>
+        </div>x
         <div class="mt-5 relative">
             <div class="w-full h-100 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
                 <div class="ml-19 w-[calc(100%-76px)] h-full overflow-x-auto no-scrollbar">
