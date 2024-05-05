@@ -75,6 +75,12 @@
                             <span class="text-sm !text-black">/ Unit</span>
                         </h2>
                     </div>
+                    <p class="flex gap-3">
+                        <span class="text-lg">Berat Produk</span>
+                        <a href="" class="text-feprimary">
+                            <span class="text-lg">10kg</span>
+                        </a>
+                    </p>
                     <div class="my-8 flex gap-5">
                         <p class="mb-2 text-lg">
                             Tipe
