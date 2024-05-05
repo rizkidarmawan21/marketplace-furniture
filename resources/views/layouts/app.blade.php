@@ -1,3 +1,5 @@
+@props(['showHeader' => true, 'headerSearch' => true])
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
@@ -18,7 +20,9 @@
 </head>
 
 <body class="bg-white font-quicksand">
-    @include('partials.main.header')
+    @if ($showHeader ?? true)
+        @include('partials.main.header')
+    @endif
     {{ $slot }}
 </body>
 

@@ -1,11 +1,11 @@
 <div class="flex justify-center lg:mx-52 mt-10">
-    <div class="w-[90%] lg:container h-70 ">
+    <div class="w-[90%] lg:container ">
         <div class="bg-feprimary p-10 text-white">
             <div class="w-1/2">
-                <h1 class="text-2xl text-semibold">
+                <h1 class="text-xl text-semibold">
                     Hubungi Kami
                 </h1>
-                <p class="mt-3">
+                <p class="mt-3 text-sm">
                     Kami sangat senang bisa berkomunikasi dengan Anda. Pastikan selalu terhubung dengan kami untuk
                     mendapatkan
                     informasi terbaru.
@@ -23,7 +23,7 @@
                                 </svg>
                             </td>
                             <td>
-                                <p class="text-lg font-semibold">+62 812 3456 7890</p>
+                                <p class="text-sm font-semibold">+62 812 3456 7890</p>
                             </td>
                         </tr>
                         <tr>
@@ -36,14 +36,14 @@
                                 </svg>
                             </td>
                             <td>
-                                <p class="text-lg font-semibold">example@gmail.com</p>
+                                <p class="text-sm font-semibold">example@gmail.com</p>
                             </td>
                         </tr>
                     </table>
                 </div>
             </div>
         </div>
-        <div class="bg-feprimary/70 text-center text-black py-3">
+        <div class="bg-feprimary/70 text-center text-black py-2 text-xs">
             © 2020. All rights reserved. PT. Furniture
         </div>
     </div>
