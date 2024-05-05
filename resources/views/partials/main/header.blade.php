@@ -1,8 +1,6 @@
 <header class="flex justify-center lg:mx-52">
     <div class="w-[90%] lg:container py-5 flex justify-between items-center">
-        <h1>
-            Logo
-        </h1>
+        <img src="{{ asset('assets/icons/logo.png') }}" class="w-35" alt="">
         <div class="w-1/2 relative flex">
 
             @if ($headerSearch ?? true)
