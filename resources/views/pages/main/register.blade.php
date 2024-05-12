@@ -16,7 +16,7 @@
                                     Daftar Akun
                                 </h2>
 
-                                <form method="POST" action="">
+                                <form method="POST" action="{{ route('register') }}">
                                     @csrf
                                     <div class="mb-4">
                                         <label class="mb-2.5 block font-medium text-black dark:text-white">Nama</label>

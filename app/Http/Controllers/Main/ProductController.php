@@ -30,4 +30,15 @@ class ProductController extends Controller
 
         return view('pages.main.products', compact('products', 'listCategory'));
     }
+
+    public function show(Product $product)
+    {
+        $product = Product::with('category', 'productImages')->where('id', $product->id)->first();
+
+        if (!$product) {
+            return abort(404, 'Data not found');
+        }
+
+        return view('pages.main.detail-product', compact('product'));
+    }
 }

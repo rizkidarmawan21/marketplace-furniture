@@ -61,7 +61,7 @@
                                     Sign In to System
                                 </h2>
 
-                                <form method="POST" action="{{ route('login') }}">
+                                <form method="POST" action="{{ route('admin.login') }}">
                                     @csrf
                                     <div class="mb-4">
                                         <label class="mb-2.5 block font-medium text-black dark:text-white">Email</label>

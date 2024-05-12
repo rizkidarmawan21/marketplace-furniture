@@ -10,15 +10,18 @@
                 </p>
             </div>
             <div class="text-black">
-                <a href="" class="text-lg text-black hover:text-slate-400">
+                <a href="{{ route('products.index') }}" class="text-lg text-black hover:text-slate-400">
                     Lihat Selanjutnya
                 </a>
             </div>
         </div>
         <div class="mt-5">
-            <div class="w-full grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-5 gap-6 place-content-center">
+            <div class="w-full grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-5 gap-6 place-content-center" x-data="">
                 @forelse ($productRecomendation as $item)
                     <div
+                        @click="
+                          window.location.href = '{{ route('products.show', $item->id) }}'
+                        "
                         class="card lg:w-55 xl:w-60 h-full gap-2  bg-white border border-[#CACACA] rounded-xl hover:cursor-pointer">
                         <img src="{{ asset($item->productImages[0]->image_path) }}" alt=""
                             class="w-full h-[55%] object-cover rounded-t-xl">

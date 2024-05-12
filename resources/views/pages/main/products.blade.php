@@ -33,7 +33,8 @@
                 <div class="mt-3">
                     <label class="flex items-center gap-2" @click="window.location.href = window.location.pathname">
                         <input type="checkbox" class="h-5 w-5 text-feprimary border-gray-300 focus:ring-0"
-                            :checked="!(window.location.search.includes('category') && new URL(window.location.href).searchParams.get('category'))">
+                            :checked="!(window.location.search.includes('category') && new URL(window.location.href).searchParams
+                                .get('category'))">
                         <span class="text-xs">Semua</span>
                     </label>
                 </div>
@@ -41,17 +42,17 @@
                     <div class="mt-3">
                         <label class="flex items-center gap-2"
                             @click="
-                const url = new URL(window.location.href);
-                const categories = url.searchParams.get('category') ? url.searchParams.get('category').split(',') : [];
-                if (categories.includes('{{ $item->id }}')) {
-                    categories.splice(categories.indexOf('{{ $item->id }}'), 1);
-                } else {
-                    categories.push('{{ $item->id }}');
-                }
-                url.searchParams.set('category', categories.join(','));
-                url.searchParams.delete('page');
-                window.location.href = url.href;
-              ">
+                            const url = new URL(window.location.href);
+                            const categories = url.searchParams.get('category') ? url.searchParams.get('category').split(',') : [];
+                            if (categories.includes('{{ $item->id }}')) {
+                                categories.splice(categories.indexOf('{{ $item->id }}'), 1);
+                            } else {
+                                categories.push('{{ $item->id }}');
+                            }
+                            url.searchParams.set('category', categories.join(','));
+                            url.searchParams.delete('page');
+                            window.location.href = url.href;
+                        ">
                             <input type="checkbox" class="h-5 w-5 text-feprimary border-gray-300 focus:ring-0"
                                 :checked="window.location.search.includes('{{ $item->id }}')">
                             <span class="text-xs">
@@ -72,11 +73,13 @@
             <div class="col-span-4">
                 <div class="w-full">
                     <div>
-                        <div
-                            class="w-full grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-6 place-content-center">
+                        <div class="w-full grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-6 place-content-center"
+                            x-data="">
 
                             @forelse ($products as $item)
-                                <div
+                                <div @click="
+                                      window.location.href = '{{ route('products.show', $item->id) }}'
+                                    "
                                     class="card relative lg:w-45 xl:w-50 h-full gap-2  bg-white border border-[#CACACA] rounded-xl hover:cursor-pointer">
                                     <img src="{{ asset($item->productImages[0]->image_path) }}" alt=""
                                         alt="" class="w-full h-[180px] object-cover rounded-t-xl">
@@ -104,15 +107,20 @@
                                         </div>
                                     </div>
                                     <div class="absolute top-2 right-2">
-                                        <button
-                                            class="border border-[#CACACA] bg-white p-2 rounded-full hover:bg-zinc-100">
-                                            <svg width="16" height="16" viewBox="0 0 14 14" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M12.6666 12.3333C12.6666 13.0733 12.0733 13.6666 11.3333 13.6666C10.9797 13.6666 10.6405 13.5262 10.3905 13.2761C10.1404 13.0261 9.99996 12.6869 9.99996 12.3333C9.99996 11.5933 10.5933 11 11.3333 11C11.6869 11 12.0261 11.1405 12.2761 11.3905C12.5261 11.6406 12.6666 11.9797 12.6666 12.3333ZM4.66663 11C3.92663 11 3.33329 11.5933 3.33329 12.3333C3.33329 12.6869 3.47377 13.0261 3.72382 13.2761C3.97387 13.5262 4.313 13.6666 4.66663 13.6666C5.40663 13.6666 5.99996 13.0733 5.99996 12.3333C5.99996 11.5933 5.40663 11 4.66663 11ZM4.79996 8.75331L4.77996 8.83331C4.77996 8.92665 4.85329 8.99998 4.94663 8.99998H12.6666V10.3333H4.66663C4.313 10.3333 3.97387 10.1928 3.72382 9.94279C3.47377 9.69274 3.33329 9.3536 3.33329 8.99998C3.33329 8.76665 3.39329 8.54665 3.49329 8.35998L4.39996 6.72665L1.99996 1.66665H0.666626V0.333313H2.84663L3.47329 1.66665H13.3333C13.7 1.66665 14 1.96665 14 2.33331C14 2.44665 13.9666 2.55998 13.92 2.66665L11.5333 6.97998C11.3066 7.38665 10.8666 7.66665 10.3666 7.66665H5.39996L4.79996 8.75331V8.75331ZM5.66663 6.33331H6.66663V4.99998H5.03996L5.66663 6.33331ZM7.33329 4.99998V6.33331H9.33329V4.99998H7.33329ZM9.33329 4.33331V2.99998H7.33329V4.33331H9.33329ZM11.4066 4.99998H9.99996V6.33331H10.6666L11.4066 4.99998ZM12.52 2.99998H9.99996V4.33331H11.78L12.52 2.99998ZM4.09329 2.99998L4.71996 4.33331H6.66663V2.99998H4.09329Z"
-                                                    fill="#C6B38D" />
-                                            </svg>
-                                        </button>
+                                        <form action="{{ route('cart.store') }}" method="post">
+                                            @csrf
+                                            <input type="hidden" name="product_id" value="{{ $item->id }}">
+                                            <input type="hidden" name="quantity" value="1">
+                                            <button
+                                                class="border border-[#CACACA] bg-white p-2 rounded-full hover:bg-zinc-100">
+                                                <svg width="16" height="16" viewBox="0 0 14 14" fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <path
+                                                        d="M12.6666 12.3333C12.6666 13.0733 12.0733 13.6666 11.3333 13.6666C10.9797 13.6666 10.6405 13.5262 10.3905 13.2761C10.1404 13.0261 9.99996 12.6869 9.99996 12.3333C9.99996 11.5933 10.5933 11 11.3333 11C11.6869 11 12.0261 11.1405 12.2761 11.3905C12.5261 11.6406 12.6666 11.9797 12.6666 12.3333ZM4.66663 11C3.92663 11 3.33329 11.5933 3.33329 12.3333C3.33329 12.6869 3.47377 13.0261 3.72382 13.2761C3.97387 13.5262 4.313 13.6666 4.66663 13.6666C5.40663 13.6666 5.99996 13.0733 5.99996 12.3333C5.99996 11.5933 5.40663 11 4.66663 11ZM4.79996 8.75331L4.77996 8.83331C4.77996 8.92665 4.85329 8.99998 4.94663 8.99998H12.6666V10.3333H4.66663C4.313 10.3333 3.97387 10.1928 3.72382 9.94279C3.47377 9.69274 3.33329 9.3536 3.33329 8.99998C3.33329 8.76665 3.39329 8.54665 3.49329 8.35998L4.39996 6.72665L1.99996 1.66665H0.666626V0.333313H2.84663L3.47329 1.66665H13.3333C13.7 1.66665 14 1.96665 14 2.33331C14 2.44665 13.9666 2.55998 13.92 2.66665L11.5333 6.97998C11.3066 7.38665 10.8666 7.66665 10.3666 7.66665H5.39996L4.79996 8.75331V8.75331ZM5.66663 6.33331H6.66663V4.99998H5.03996L5.66663 6.33331ZM7.33329 4.99998V6.33331H9.33329V4.99998H7.33329ZM9.33329 4.33331V2.99998H7.33329V4.33331H9.33329ZM11.4066 4.99998H9.99996V6.33331H10.6666L11.4066 4.99998ZM12.52 2.99998H9.99996V4.33331H11.78L12.52 2.99998ZM4.09329 2.99998L4.71996 4.33331H6.66663V2.99998H4.09329Z"
+                                                        fill="#C6B38D" />
+                                                </svg>
+                                            </button>
+                                        </form>
                                     </div>
                                 </div>
                             @empty

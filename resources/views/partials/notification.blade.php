@@ -8,7 +8,7 @@
 
 
 @if (session('success'))
-   <div class="w-[350px] h-[80px] rounded-lg bg-teal-500 flex items-center px-3 fixed z-99999 right-2 top-2" role="alert">
+   <div class="w-[350px] h-[80px] rounded-lg bg-teal-500 flex items-center px-3 fixed z-999999 right-2 top-2" role="alert">
     <div class="flex justify-start items-center gap-3">
         <span>
             <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="#fff" stroke="currentColor"

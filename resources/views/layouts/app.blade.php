@@ -20,6 +20,7 @@
 </head>
 
 <body class="bg-white font-quicksand">
+    @include('partials.notification')
     @if ($showHeader ?? true)
         @include('partials.main.header')
     @endif
