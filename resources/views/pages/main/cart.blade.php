@@ -1,14 +1,18 @@
 <x-app-layout>
     <div class="flex min-h-[calc(100vh-18rem)] justify-center lg:mx-52 mt-15">
         <div class="card w-full flex justify-between">
-            <div class="w-[75%] border border-[#DCDCDC] rounded-xl">
+            <div class="w-[75%] border border-[#DCDCDC] rounded-xl" x-data="{ itemSelected: [] }">
+                {{-- debug itemSelected value --}}
+                {{-- <div x-text="itemSelected"></div> --}}
                 @forelse ($carts as $item)
                     <div class="item-cart">
                         <div class="mt-5 px-5 mb-5 flex items-center justify-between">
                             <div class="flex w-full gap-4 items-center">
-                                <input type="checkbox" class="h-5 w-5 text-feprimary border-gray-300 focus:ring-0">
+                                <input type="checkbox" class="h-5 w-5 text-feprimary border-gray-300 focus:ring-0"
+                                    :value="{{ $item->id }}" x-model="itemSelected"
+                                    @change="if (!$event.target.checked) itemSelected = itemSelected.filter(i => i !== {{ $item->id }})">
                                 <img src="{{ asset($item->product->productImages[0]->image_path) }}" alt=""
-                                    class="w-30 rounded-lg object-cover border border-[#E5E5E5]">
+                                    class="w-30 h-25 rounded-lg object-cover border border-[#E5E5E5]">
                                 <div class="w-1/2 self-start">
                                     <h3 class="text-lg line-clamp-2">
                                         {{ $item->product->name }}
@@ -47,7 +51,8 @@
                                             <input type="hidden" name="quantity" value="1">
                                             <input type="hidden" name="type" value="decrement">
 
-                                            <button class="bg-slate-100 text-feprimary rounded-full px-2.5" :type="quantity == 1 ? 'button':'submit' ">
+                                            <button class="bg-slate-100 text-feprimary rounded-full px-2.5"
+                                                :type="quantity == 1 ? 'button' : 'submit'">
                                                 <span class="text-lg">-</span>
                                             </button>
                                         </form>
@@ -64,7 +69,9 @@
 
                                             <input type="hidden" name="quantity" value="1">
                                             <input type="hidden" name="type" value="increment">
-                                            <button :type="quantity == {{ (int) $item->product->stock }} ? 'button':'submit' " class="bg-slate-100 text-feprimary rounded-full px-2">
+                                            <button
+                                                :type="quantity == {{ (int) $item->product->stock }} ? 'button' : 'submit'"
+                                                class="bg-slate-100 text-feprimary rounded-full px-2">
                                                 <span class="text-lg">+</span>
                                             </button>
                                         </form>
@@ -111,10 +118,13 @@
                         </div>
                         <br>
                         <div class="m-5">
-                            <button
-                                class="w-full bg-feprimary text-white text-lg font-semibold py-2 rounded-lg focus:outline-none">
-                                Buat Pesanan
-                            </button>
+                            <form action="" method="post">
+                                <input type="text" name="items" x-model="itemSelected" hidden>
+                                <button
+                                    class="w-full bg-feprimary text-white text-lg font-semibold py-2 rounded-lg focus:outline-none">
+                                    Buat Pesanan
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>

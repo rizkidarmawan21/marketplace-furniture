@@ -12,11 +12,22 @@ use Illuminate\Support\Facades\Redirect;
 
 class AuthController extends Controller
 {
+    /**
+     * Menampilkan halaman login.
+     *
+     * @return \Illuminate\View\View
+     */
     public function login()
     {
         return view('pages.main.login');
     }
 
+    /**
+     * Melakukan proses autentikasi pengguna.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function authenticate(Request $request)
     {
         $credentials = $request->only('email', 'password');
@@ -32,6 +43,12 @@ class AuthController extends Controller
         ]);
     }
 
+    /**
+     * Melakukan proses logout pengguna.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function logout(Request $request)
     {
         auth()->logout();
@@ -43,11 +60,22 @@ class AuthController extends Controller
         return redirect('/');
     }
 
+    /**
+     * Menampilkan halaman registrasi.
+     *
+     * @return \Illuminate\View\View
+     */
     public function register()
     {
         return view('pages.main.register');
     }
 
+    /**
+     * Menyimpan data registrasi pengguna baru.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -68,24 +96,35 @@ class AuthController extends Controller
         return redirect()->route('home')->with('success', 'User created successfully.');
     }
 
+    /**
+     * Menampilkan halaman profil pengguna.
+     *
+     * @return \Illuminate\View\View
+     */
     public function profile()
     {
-
-        return view('pages.main.profile',[
+        return view('pages.main.profile', [
             'user' => auth()->user(),
         ]);
     }
 
+    /**
+     * Memperbarui profil pengguna.
+     *
+     * @param  \App\Http\Requests\ProfileUpdateRequest  $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function updateProfile(ProfileUpdateRequest $request): RedirectResponse
     {
         $request->user()->fill($request->validated());
 
+        // Jika email berubah, atur ulang verifikasi email
         if ($request->user()->isDirty('email')) {
             $request->user()->email_verified_at = null;
         }
 
         $request->user()->save();
 
-      return redirect()->back()->with('success', 'Profile updated successfully.');
+        return redirect()->back()->with('success', 'Profile updated successfully.');
     }
 }

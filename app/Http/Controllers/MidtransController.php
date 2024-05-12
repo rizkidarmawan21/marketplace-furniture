@@ -3,10 +3,8 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Models\CallbackLog;
+use App\Models\MidtranCallbackLog;
 use App\Models\Transaction;
-use App\Notifications\NotificationNewOrderDoctor;
-use App\Notifications\NotificationNewOrderPatient;
 use Illuminate\Http\Request;
 use Midtrans\Config;
 use Midtrans\Notification;
@@ -35,7 +33,7 @@ class MidtransController extends Controller
         $order_id = $notification->order_id;
 
         // Cari transaksi berdasarkan code
-        $transaction = Transaction::with('consultation')->where('code', $order_id)->first();
+        $transaction = Transaction::where('invoice_code', $order_id)->first();
 
         if (is_null($transaction)) {
             return response()->json([
@@ -55,9 +53,9 @@ class MidtransController extends Controller
             'payment_type' => $type,
         ];
 
-        CallbackLog::create($log);
+        MidtranCallbackLog::create($log);
 
-        if ($transaction->status_payment == 'Paid') {
+        if ($transaction->status == 'Paid') {
             return response()->json([
                 'meta' => [
                     'code' => 200,
@@ -70,21 +68,21 @@ class MidtransController extends Controller
         if ($status == 'capture') {
             if ($type == 'credit_card') {
                 if ($fraud == 'challenge') {
-                    $transaction->status_payment = 'Pending';
+                    $transaction->status = 'pending';
                 } else {
-                    $transaction->status_payment = 'Paid';
+                    $transaction->status = 'onprogress';
                 }
             }
         } else if ($status == 'settlement') {
-            $transaction->status_payment = 'Paid';
+            $transaction->status = 'onprogress';
         } else if ($status == 'pending') {
-            $transaction->status_payment = 'Pending';
+            $transaction->status = 'pending';
         } else if ($status == 'deny') {
-            $transaction->status_payment = 'Cancel';
+            $transaction->status = 'failed';
         } else if ($status == 'expire') {
-            $transaction->status_payment = 'Cancel';
-        } else if ($status == 'cancel') {
-            $transaction->status_payment = 'Cancel';
+            $transaction->status = 'failed';
+        } else if ($status == 'failed') {
+            $transaction->status = 'failed';
         }
 
         // Simpan transaksi
