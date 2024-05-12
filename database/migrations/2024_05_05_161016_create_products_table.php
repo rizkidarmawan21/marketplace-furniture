@@ -25,22 +25,7 @@ return new class extends Migration
             $table->text('description');
             $table->foreignId('category_id')->constrained()->cascadeOnDelete();
             $table->integer('price');
-            $table->string('unit')->nullable();
             $table->integer('stock');
-            $table->integer('weight');
-
-            $table->softDeletes();
-            $table->timestamps();
-        });
-
-
-        Schema::create('product_types', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('product_id')->constrained()->cascadeOnDelete();
-            $table->string('name');
-            $table->string('price');
-            $table->integer('stock');
-            $table->string("weight");
 
             $table->softDeletes();
             $table->timestamps();
@@ -64,7 +49,6 @@ return new class extends Migration
     {
         Schema::dropIfExists('categories');
         Schema::dropIfExists('products');
-        Schema::dropIfExists('product_types');
         Schema::dropIfExists('product_images');
     }
 };

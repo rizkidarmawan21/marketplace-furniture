@@ -10,7 +10,7 @@
                     <div class="">
                         <div class="flex justify-between items-center">
                             <h3 class="text-2xl font-medium leading-6 text-gray-900 dark:text-white" id="modal-title">
-                                Create User
+                                Create Category
                             </h3>
                             <button class="hover:bg-slate-100 p-2 rounded-lg" @click="modalCreate = false">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 fill-current"
@@ -22,8 +22,7 @@
                         </div>
                         <div class="mt-10">
                             <form
-                                :action="isEdit ? '{{ url('') }}' + '/admin/users/' + selectedValue?.id :
-                                    '{{ route('admin.users.store') }}'"
+                                :action="isEdit ? '{{ url('') }}' + '/admin/categories/' + selectedValue?.id : '{{ route('admin.categories.store') }}'"
                                 method="POST" class="space-y-3">
                                 @csrf
                                 <input type="hidden" name="_method" :value="isEdit ? 'PUT' : 'POST'">
@@ -32,19 +31,6 @@
                                     <x-text-input id="name" name="name" type="text" placeholder="Insert Name"
                                         x-bind:value="isEdit ? selectedValue.name : ''" class="!py-2 !px-3" />
                                     <x-input-error :messages="$errors->get('name')" class="mt-2" />
-                                </div>
-                                <div class="space-y-2">
-                                    <x-input-label for="email" value="Email" class="!text-lg" />
-                                    <x-text-input id="email" name="email" type="email"
-                                        x-bind:value="isEdit ? selectedValue.email : ''"
-                                        placeholder="Insert Email Address" class="!py-2 !px-3" />
-                                    <x-input-error :messages="$errors->get('email')" class="mt-2" />
-                                </div>
-                                <div class="space-y-2">
-                                    <x-input-label for="password" value="password" class="!text-lg" />
-                                    <x-text-input id="password" name="password" type="password"
-                                        placeholder="Insert Password" class="!py-2 !px-3" />
-                                    <x-input-error :messages="$errors->get('password')" class="mt-2" />
                                 </div>
                                 <div class="pt-10">
                                     <x-primary-button class="!rounded-full !py-3">

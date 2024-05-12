@@ -8,7 +8,7 @@
         selectedValue: ''
     }">
         <h2 class="mb-5 text-3xl font-medium">
-            User Management
+            Category Management
         </h2>
         <div
             class="rounded-sm border border-stroke bg-white px-5 py-6 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5">
@@ -17,9 +17,8 @@
                 <div class="flex justify-between mb-5">
                     <a @click="modalCreate = true, isEdit = false"
                         class="text-sm cursor-pointer rounded-full border border-primary bg-primary py-2 px-5 font-medium text-white transition hover:bg-opacity-90">
-                        Create User
+                        Add New
                     </a>
-                    <input type="text" placeholder="Search..." class="w-1/4 rounded-full px-5 border-slate-400">
                 </div>
             </div>
             <div class="max-w-full overflow-x-auto">
@@ -32,19 +31,13 @@
                             <th class="min-w-[100px] px-4 py-4 font-medium text-black dark:text-white">
                                 Name
                             </th>
-                            <th class="min-w-[100px] px-4 py-4 font-medium text-black dark:text-white">
-                                Email
-                            </th>
-                            {{-- <th class="min-w-[100px] px-4 py-4 font-medium text-black dark:text-white">
-                                Role
-                            </th> --}}
                             <th class="px-4 py-4 font-medium text-black dark:text-white">
                                 Actions
                             </th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($users as $item)
+                        @foreach ($categories as $item)
                             <tr class="bg-slate-100/25">
                                 <td class="border border-[#eee] px-4 py-2 pl-9 dark:border-strokedark xl:pl-11">
                                     <h5 class="font-medium text-black dark:text-white">
@@ -56,17 +49,6 @@
                                         {{ $item->name }}
                                     </p>
                                 </td>
-                                <td class="border border-[#eee] px-4 py-5 dark:border-strokedark">
-                                    <p class="text-black dark:text-white">
-                                        {{ $item->email }}
-                                    </p>
-                                </td>
-                                {{-- <td class="border border-[#eee] px-4 py-5 dark:border-strokedark">
-                                    <p
-                                        class="inline-flex rounded-full bg-success bg-opacity-10 px-3 py-1 text-sm font-medium text-success">
-                                        Paid
-                                    </p>
-                                </td> --}}
                                 <td class="border-b border-[#eee] px-4 py-5 dark:border-strokedark">
                                     <div class="flex items-center space-x-3.5">
                                         <button type="submit" class="hover:text-primary"
@@ -104,7 +86,7 @@
                 </table>
             </div>
         </div>
-        @include('pages.users.modal-create')
+        @include('pages.categories.modal-create')
         @include('partials.confirm')
     </div>
 </x-dashboard-layout>

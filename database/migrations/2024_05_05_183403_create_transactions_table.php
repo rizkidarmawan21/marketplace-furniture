@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->string('phone_number');
             $table->string('invoice_code');
-            $table->string('total_price'); // di dapat dari total pembelian ditambah ongkir
+            $table->string('total_price'); // di dapat dari total pembelian 
             $table->string('payment_url')->nullable();
             $table->enum('status', ['pending', 'onprogress', 'success', 'failed'])->default('pending');
 
@@ -28,11 +28,9 @@ return new class extends Migration
             $table->id();
             $table->foreignId('transaction_id')->constrained()->cascadeOnDelete();
             $table->foreignId('product_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('product_type_id')->nullable()->constrained()->cascadeOnDelete();
 
             $table->integer('quantity');
             $table->integer('price');
-            $table->integer('weight');
             $table->integer('total');
 
             $table->softDeletes();
@@ -42,20 +40,13 @@ return new class extends Migration
         Schema::create('transaction_shippings', function (Blueprint $table) {
             $table->id();
             $table->foreignId('transaction_id')->constrained()->cascadeOnDelete();
-            
+
             $table->string('receiver_name');
             $table->string('receiver_phone');
             $table->string('receiver_address');
             $table->string('receiver_province');
             $table->string('receiver_city');
-            $table->string('receiver_postal_code');
-
-            $table->string('origin_city')->nullable();
-            $table->string('courier')->nullable();
-            $table->string('service')->nullable();
-            $table->string('service_description')->nullable();
-            $table->integer('total_weight');
-            $table->integer('shipping_price')->nullable();
+            $table->string('receiver_postal_code')->nullable();
 
             $table->softDeletes();
             $table->timestamps();
