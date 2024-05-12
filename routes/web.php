@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Main\AuthController;
 use App\Http\Controllers\Main\CartController;
+use App\Http\Controllers\Main\CheckoutController;
 use App\Http\Controllers\Main\HomeController;
 use App\Http\Controllers\Main\MyOrderController;
 use App\Http\Controllers\Main\ProductController;
@@ -34,6 +35,8 @@ Route::middleware('auth')->group(function () {
     Route::post('cart', [CartController::class, 'store'])->name('cart.store');
     Route::delete('cart/{cart}', [CartController::class, 'destroy'])->name('cart.destroy');
     Route::put('cart/update/{cart}', [CartController::class, 'update'])->name('cart.update');
+
+    Route::post('checkout', [CheckoutController::class, 'index'])->name('checkout.index');
 
     Route::get('profile', [AuthController::class, 'profile'])->name('profile');
     Route::post('profile', [AuthController::class, 'updateProfile'])->name('profile.update');

@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="flex min-h-[calc(100vh-18rem)] justify-center lg:mx-52 mt-5">
+    <div class="flex min-h-[calc(100vh-18rem)] justify-center lg:mx-52 mt-5" x-data="checkout">
         <div class="card w-full flex justify-between">
             <div class="w-full bg-feprimary h-35 rounded-lg">
                 <div class="flex justify-center items-center h-full">
@@ -51,8 +51,12 @@
                                             <label for="provincy"
                                                 class="text-base text-[#515151] font-semibold">Provinsi</label>
                                             <select name="" id=""
-                                                class="w-full rounded-lg border-2 text-black border-zinc-200 focus:border-feprimary focus:ring-0">
+                                                class="w-full rounded-lg border-2 text-black border-zinc-200 focus:border-feprimary focus:ring-0"
+                                                @change="getCity()">
                                                 <option value="">Pilih Provinsi</option>
+                                                <template x-for="province in provinces" :key="province.id">
+                                                    <option x-text="province.name" :value="province.name"></option>
+                                                </template>
                                             </select>
                                         </div>
                                         <div class="flex flex-col gap-2">
@@ -79,43 +83,6 @@
                                         </div>
                                     </div>
                                 </form>
-                            </div>
-
-                            <h1 class="text-feprimary text-xl mt-10">
-                                Jasa Pengiriman
-                            </h1>
-
-                            <hr class="my-5 text-slate-200">
-                            <div>
-                                <select name="" id=""
-                                    class="rounded-lg border-2 text-black border-zinc-200 focus:border-feprimary focus:ring-0">
-                                    <option value="">Pilih Jasa Pengiriman</option>
-                                    <option value="JNE">JNE</option>
-                                    <option value="TIKI">TIKI</option>
-                                    <option value="POS">POS</option>
-                                </select>
-                                <div class="mt-5 flex gap-5">
-                                    <div
-                                        class="bg-slate-50 border border-zinc-200 w-40 h-15 flex flex-col justify-center items-center rounded-lg">
-                                        <h1 class="font-medium text-sm text-black">OKE</h1>
-                                        <p class="text-black text-sm">Rp. 200.000</p>
-                                    </div>
-                                    <div
-                                        class="bg-slate-50 border border-zinc-200 w-40 h-15 flex flex-col justify-center items-center rounded-lg">
-                                        <h1 class="font-medium text-sm text-black">REG</h1>
-                                        <p class="text-black text-sm">Rp. 200.000</p>
-                                    </div>
-                                    <div
-                                        class="bg-slate-50 border border-zinc-200 w-40 h-15 flex flex-col justify-center items-center rounded-lg">
-                                        <h1 class="font-medium text-sm text-black">SPS</h1>
-                                        <p class="text-black text-sm">Rp. 200.000</p>
-                                    </div>
-                                    <div
-                                        class="bg-slate-50 border border-zinc-200 w-40 h-15 flex flex-col justify-center items-center rounded-lg">
-                                        <h1 class="font-medium text-sm text-black">YES</h1>
-                                        <p class="text-black text-sm">Rp. 200.000</p>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                         <div class="detail-cart w-[35%] pl-10">
@@ -149,4 +116,47 @@
         </div>
     </div>
     @include('partials.main.footer')
+    <script>
+        // alpine js
+        function checkout() {
+            return {
+                isDisabled: true,
+                provinces: [],
+                cities: [],
+                selectedProvince: null,
+
+                init() {
+                    this.isDisabled = true;
+                    this.getProvince();
+                },
+
+                getProvince() {
+                    fetch(`https://www.emsifa.com/api-wilayah-indonesia/api/provinces.json`)
+                        .then(response => response.json())
+                        .then(data => {
+                            this.provinces = data;
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            alert('Terjadi kesalahan dalam data wilayah, silahkan coba lagi');
+                        });
+                },
+
+                getCity() {
+                    console.log('asas');
+
+                    fetch(`https://www.emsifa.com/api-wilayah-indonesia/api/regencies/${provinceId}.json`)
+                        .then(response => response.json())
+                        .then(data => {
+                            this.cities = data;
+                            console.log(data);
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            alert('Terjadi kesalahan dalam data wilayah, silahkan coba lagi');
+                        });
+                }
+            }
+        }
+    </script>
 </x-app-layout>

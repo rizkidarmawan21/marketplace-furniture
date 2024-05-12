@@ -1,7 +1,7 @@
 <x-app-layout>
     <div class="flex min-h-[calc(100vh-18rem)] justify-center lg:mx-52 mt-15">
-        <div class="card w-full flex justify-between">
-            <div class="w-[75%] border border-[#DCDCDC] rounded-xl" x-data="{ itemSelected: [] }">
+        <div class="card w-full flex justify-between" x-data="{ itemSelected: [] }">
+            <div class="w-[75%] border border-[#DCDCDC] rounded-xl">
                 {{-- debug itemSelected value --}}
                 {{-- <div x-text="itemSelected"></div> --}}
                 @forelse ($carts as $item)
@@ -118,8 +118,14 @@
                         </div>
                         <br>
                         <div class="m-5">
-                            <form action="" method="post">
-                                <input type="text" name="items" x-model="itemSelected" hidden>
+                            <form action="{{ route('checkout.index') }}" method="post">
+                                @csrf
+                                <input type="text" name="items" :value="JSON.stringify(itemSelected)" hidden>
+                                {{-- error --}}
+                                @error('items')
+                                    <p class="text-red-500 text-xs">{{ $message }}</p>
+                                @enderror
+
                                 <button
                                     class="w-full bg-feprimary text-white text-lg font-semibold py-2 rounded-lg focus:outline-none">
                                     Buat Pesanan

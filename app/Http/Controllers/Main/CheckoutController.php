@@ -19,6 +19,9 @@ class CheckoutController extends Controller
 {
     public function index(Request $request)
     {
+
+        $request['items'] = json_decode($request->items, true);
+
         $validated = $request->validate([
             'items' => 'required|array',
         ]);
@@ -104,12 +107,12 @@ class CheckoutController extends Controller
 
             TransactionShipping::create([
                 'transaction_id' => $transaction->id,
-                'name' => $request->name,
-                'email' => $request->email,
-                'phone' => $request->phone,
-                'address' => $request->address,
-                'city' => $request->city,
-                'postal_code' => $request->postal_code,
+                'receiver_name' => $request->receiver_name,
+                'receiver_phone' => $request->receiver_phone,
+                'receiver_address' => $request->receiver_address,
+                'receiver_province' => $request->receiver_province,
+                'receiver_city' => $request->receiver_city,
+                'receiver_postal_code' => $request->receiver_postal_code,
             ]);
 
             Cache::forget($userKey);
