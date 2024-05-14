@@ -45,7 +45,7 @@
 
             @auth
                 <div class="space-x-7 flex items-center">
-                    <div class="relative z-99999" x-data="{ show: false }">
+                    <div class="relative" x-data="{ show: false }">
                         <button @click="show = !show">
                             <svg width="23" height="31" viewBox="0 0 30 31" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -53,7 +53,7 @@
                                 <path d="M1 30C2 10 28 10 29 30" stroke="#626262" stroke-width="2" />
                             </svg>
                         </button>
-                        <div class="absolute right-0 w-40 mt-2 bg-zinc-50 rounded shadow-xl" x-show="show" x-cloak>
+                        <div class="z-99999 absolute right-0 w-40 mt-2 bg-zinc-50 rounded shadow-xl" x-show="show" x-cloak>
                             <a href="{{ route('profile') }}"
                                 class="transition-colors text-sm duration-200 block px-4 py-2 text-normal text-gray-900 rounded hover:bg-feprimary hover:text-white">
                                 Profil Saya

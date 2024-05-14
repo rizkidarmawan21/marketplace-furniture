@@ -36,7 +36,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('cart/{cart}', [CartController::class, 'destroy'])->name('cart.destroy');
     Route::put('cart/update/{cart}', [CartController::class, 'update'])->name('cart.update');
 
-    Route::post('checkout', [CheckoutController::class, 'index'])->name('checkout.index');
+    Route::get('checkout', [CheckoutController::class, 'index'])->name('checkout.index');
+    Route::post('checkout/save-item', [CheckoutController::class, 'saveItemForCheckout'])->name('checkout.save-item');
+    Route::post('checkout/store', [CheckoutController::class, 'store'])->name('checkout.store');
 
     Route::get('profile', [AuthController::class, 'profile'])->name('profile');
     Route::post('profile', [AuthController::class, 'updateProfile'])->name('profile.update');

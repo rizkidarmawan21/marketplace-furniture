@@ -22,95 +22,152 @@
                 </div>
 
                 <div class="mt-10">
-                    <div class="card w-full flex justify-between">
-                        <div class="w-[75%]">
-                            <h1 class="text-feprimary text-xl">
-                                Informasi Pengiriman
-                            </h1>
+                    <form action="{{ route('checkout.store') }}" method="post">
+                        @csrf
+                        <div class="card w-full flex justify-between">
+                            <div class="w-[75%]">
+                                <h1 class="text-feprimary text-xl">
+                                    Informasi Pengiriman
+                                </h1>
 
-                            <hr class="my-5 text-slate-200">
+                                <hr class="my-5 text-slate-200">
 
-                            <div>
-                                <form action="" method="post">
+                                <div>
                                     <div class="grid grid-cols-2 gap-5">
                                         <div class="flex flex-col gap-2">
                                             <label for="name" class="text-base text-[#515151] font-semibold">Nama
                                                 Penerima</label>
-                                            <input type="text"
+                                            <input type="text" name="receiver_name"
                                                 class="w-full rounded-lg border-2 text-black border-zinc-200 focus:border-feprimary focus:ring-0"
                                                 placeholder="Masukkan Nama Penerima">
+
+                                            @error('receiver_name')
+                                                <span class="text-red-500 text-xs my-1">{{ $message }}</span>
+                                            @enderror
                                         </div>
                                         <div class="flex flex-col gap-2">
                                             <label for="phone_number"
                                                 class="text-base text-[#515151] font-semibold">Nomor Telepon</label>
-                                            <input type="number"
+                                            <input type="number" name="receiver_phone"
                                                 class="w-full rounded-lg border-2 text-black border-zinc-200 focus:border-feprimary focus:ring-0"
                                                 placeholder="Masukkan Nomor Telepon">
+
+                                            @error('receiver_phone')
+                                                <span class="text-red-500 text-xs my-1">{{ $message }}</span>
+                                            @enderror
                                         </div>
                                         <div class="flex flex-col gap-2">
                                             <label for="provincy"
                                                 class="text-base text-[#515151] font-semibold">Provinsi</label>
-                                            <select name="" id=""
+                                            <select name="receiver_province"
                                                 class="w-full rounded-lg border-2 text-black border-zinc-200 focus:border-feprimary focus:ring-0"
-                                                @change="getCity()">
+                                                @change="getCity($event)">
                                                 <option value="">Pilih Provinsi</option>
                                                 <template x-for="province in provinces" :key="province.id">
                                                     <option x-text="province.name" :value="province.name"></option>
                                                 </template>
                                             </select>
+
+                                            @error('receiver_province')
+                                                <span class="text-red-500 text-xs my-1">{{ $message }}</span>
+                                            @enderror
                                         </div>
                                         <div class="flex flex-col gap-2">
                                             <label for="city"
                                                 class="text-base text-[#515151] font-semibold">Kota/Kabupaten</label>
-                                            <select name="" id=""
+                                            <select name="receiver_city"
                                                 class="w-full rounded-lg border-2 text-black border-zinc-200 focus:border-feprimary focus:ring-0">
                                                 <option value="">Pilih Kota/Kabupaten</option>
+                                                <template x-for="city in cities" :key="city.id">
+                                                    <option x-text="city.name" :value="city.name"></option>
+                                                </template>
                                             </select>
+
+                                            @error('receiver_city')
+                                                <span class="text-red-500 text-xs my-1">{{ $message }}</span>
+                                            @enderror
                                         </div>
                                         <div class="flex flex-col gap-2">
                                             <label for="postal_code" class="text-base text-[#515151] font-semibold">Kode
                                                 Pos</label>
-                                            <input type="number"
+                                            <input type="number" name="receiver_postal_code"
                                                 class="w-full rounded-lg border-2 text-black border-zinc-200 focus:border-feprimary focus:ring-0"
                                                 placeholder="Masukkan Kode Pos">
+
+                                            @error('receiver_postal_code')
+                                                <span class="text-red-500 text-xs my-1">{{ $message }}</span>
+                                            @enderror
                                         </div>
                                         <div class="flex flex-col gap-2">
                                             <label for="postal_code"
                                                 class="text-base text-[#515151] font-semibold">Alamat Lengkap</label>
-                                            <textarea name="" id="" rows="1"
+                                            <textarea name="receiver_address" id="" rows="1"
                                                 class="w-full rounded-lg border-2 text-black border-zinc-200 focus:border-feprimary focus:ring-0"
                                                 placeholder="Masukkan Alamat Lengkap/Pesan"></textarea>
+
+                                            @error('receiver_address')
+                                                <span class="text-red-500 text-xs my-1">{{ $message }}</span>
+                                            @enderror
                                         </div>
                                     </div>
-                                </form>
+                                </div>
                             </div>
-                        </div>
-                        <div class="detail-cart w-[35%] pl-10">
-                            <div class="w-full bg-white border border-feprimary rounded-xl">
-                                <div>
-                                    <div class="w-full bg-feprimary rounded-t-lg border border-feprimary">
-                                        <h1 class="text-xl text-semibold text-center text-white my-2">
-                                            Rincian Belanja
-                                        </h1>
-                                    </div>
-                                    <div class="m-5">
-                                        <div class="flex justify-between">
-                                            <p class="text-base">Harga (3 Produk) :</p>
-                                            <p class="text-base text-feprimary">Rp. 1.000.000</p>
+                            <div class="detail-cart w-[35%] pl-10">
+                                <div class="w-full bg-white border border-feprimary rounded-xl">
+                                    <div>
+                                        <div class="w-full bg-feprimary rounded-t-lg border border-feprimary">
+                                            <h1 class="text-xl text-semibold text-center text-white my-2">
+                                                Rincian Belanja
+                                            </h1>
                                         </div>
-                                    </div>
-                                    <br>
-                                    <div class="m-5">
-                                        <button
-                                            class="w-full bg-feprimary text-white text-lg font-semibold py-2 rounded-lg focus:outline-none disabled:bg-feprimary/40 disabled:cursor-not-allowed"
-                                            disabled>
-                                            Buat Pesanan
-                                        </button>
+                                        <div class="m-5">
+                                            <div class="flex justify-between">
+                                                <p class="text-base">Total Harga :</p>
+                                                <p class="text-base text-feprimary">
+                                                    {{-- get Cache from php laravel --}}
+                                                    @php
+                                                        $total = 0;
+                                                        $userKey = 'items_' . Auth::user()->id;
+                                                        $carts = Cache::get($userKey);
+                                                        $carts = $carts ? $carts : [];
+                                                        foreach ($carts as $cartId) {
+                                                            $cart = App\Models\Cart::find($cartId);
+                                                            $total += $cart->product->price * $cart->quantity;
+                                                        }
+                                                        echo 'Rp. ' . number_format($total, 0, ',', '.');
+                                                    @endphp
+                                                </p>
+                                            </div>
+                                            <div class="flex justify-between">
+                                                <p class="text-base">Biaya Aplikasi :</p>
+                                                <p class="text-base text-feprimary">
+                                                    {{-- get Cache from php laravel --}}
+                                                    Rp. 5.000
+                                                </p>
+                                            </div>
+                                            <hr class="my-2 border-slate-200">
+                                            <div class="flex justify-between">
+                                                <p class="text-base font-semibold">Total Bayar :</p>
+                                                <p class="text-base text-feprimary font-semibold">
+                                                    {{-- get Cache from php laravel --}}
+                                                    @php
+                                                        echo 'Rp. ' . number_format($total + 5000, 0, ',', '.');
+                                                    @endphp
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div class="m-5">
+                                            <button type="submit"
+                                                class="w-full bg-feprimary text-white text-lg font-semibold py-2 rounded-lg focus:outline-none disabled:bg-feprimary/40 disabled:cursor-not-allowed">
+                                                Buat Pesanan
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -142,8 +199,10 @@
                         });
                 },
 
-                getCity() {
-                    console.log('asas');
+                getCity(event) {
+                    console.log('asas', event.target.value);
+                    let provinceName = event.target.value;
+                    let provinceId = this.provinces.find(province => province.name === provinceName).id;
 
                     fetch(`https://www.emsifa.com/api-wilayah-indonesia/api/regencies/${provinceId}.json`)
                         .then(response => response.json())
@@ -155,6 +214,10 @@
                             console.error('Error:', error);
                             alert('Terjadi kesalahan dalam data wilayah, silahkan coba lagi');
                         });
+                },
+
+                submit() {
+                    this.isDisabled = false;
                 }
             }
         }

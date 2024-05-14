@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Models\Transaction;
 use App\Models\TransactionDetail;
 use App\Models\TransactionShipping;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
@@ -19,7 +20,18 @@ class CheckoutController extends Controller
 {
     public function index(Request $request)
     {
+        $userKey = 'items_' . auth()->id();
+        $cartItems = Cache::get($userKey);
 
+        if ($cartItems === null || empty($cartItems)) {
+            return redirect()->route('cart.index')->with('failed', 'Pilih produk yang ingin dichackout terlebih dahulu !');
+        }
+
+        return view('pages.main.checkout');
+    }
+
+    public function saveItemForCheckout(Request $request)
+    {
         $request['items'] = json_decode($request->items, true);
 
         $validated = $request->validate([
@@ -32,20 +44,19 @@ class CheckoutController extends Controller
         $userKey = 'items_' . auth()->id();
         Cache::put($userKey, $items, now()->addMinutes(10));
 
-        return view('pages.main.checkout');
+        return redirect()->route('checkout.index');
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'receiver_name' => 'required|string',
-            'receiver_phone' => 'required|string',
+            'receiver_name' => 'required|string|max:255',
+            'receiver_phone' => 'required|string|max:255',
             'receiver_address' => 'required|string',
-            'receiver_province' => 'required|string',
-            'receiver_city' => 'required|string',
-            'receiver_postal_code' => 'integer',
+            'receiver_province' => 'required|string|max:255',
+            'receiver_city' => 'required|string|max:255',
+            'receiver_postal_code' => 'required|string|max:255',
         ]);
-
 
         try {
             DB::beginTransaction();
@@ -66,7 +77,7 @@ class CheckoutController extends Controller
 
 
             $itemProducts = [];
-            $totalPrice = 0;
+            $totalPrice = 5000;
 
             foreach ($cartItems as $cart_id) {
                 $cart = Cart::find($cart_id);
@@ -86,6 +97,8 @@ class CheckoutController extends Controller
 
                         $totalPrice += $total;
                     }
+
+                    $cart->delete();
                 }
             }
 
@@ -103,6 +116,12 @@ class CheckoutController extends Controller
                     'quantity' => $itemProduct['quantity'],
                     'total' => $itemProduct['total'],
                 ]);
+
+
+                // Mengurangi stok produk
+                $product = Product::find($itemProduct['product_id']);
+                $product->stock -= $itemProduct['quantity'];
+                $product->save();
             }
 
             TransactionShipping::create([
@@ -154,7 +173,6 @@ class CheckoutController extends Controller
                     'bank_transfer',
                     'alfamart',
                     'alfamidi',
-
                 ],
                 'vtweb' => array()
             ];

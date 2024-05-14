@@ -118,7 +118,7 @@
                         </div>
                         <br>
                         <div class="m-5">
-                            <form action="{{ route('checkout.index') }}" method="post">
+                            <form action="{{ route('checkout.save-item') }}" method="post">
                                 @csrf
                                 <input type="text" name="items" :value="JSON.stringify(itemSelected)" hidden>
                                 {{-- error --}}
@@ -126,8 +126,10 @@
                                     <p class="text-red-500 text-xs">{{ $message }}</p>
                                 @enderror
 
-                                <button
-                                    class="w-full bg-feprimary text-white text-lg font-semibold py-2 rounded-lg focus:outline-none">
+                                <button :disabled="itemSelected.length == 0"
+                                    class="w-full bg-feprimary text-white text-lg font-semibold py-2 rounded-lg focus:outline-none" 
+                                    :class="itemSelected.length == 0 ? 'cursor-not-allowed bg-feprimary/70' : 'hover:bg-feprimary/70 transition duration-300'"
+                                    >
                                     Buat Pesanan
                                 </button>
                             </form>
