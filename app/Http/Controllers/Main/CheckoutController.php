@@ -190,7 +190,7 @@ class CheckoutController extends Controller
 
             Log::error($e->getMessage());
 
-            return redirect()->route('main.home')->with('error', 'Terjadi kesalahan saat melakukan checkout. Silakan coba lagi.');
+            return redirect()->back()->with('failed', 'Terjadi kesalahan saat melakukan checkout. Silakan coba lagi.');
         }
     }
 
