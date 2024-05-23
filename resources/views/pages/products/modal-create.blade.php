@@ -29,6 +29,7 @@
                                 <input type="hidden" name="_method" :value="isEdit ? 'PUT' : 'POST'">
                                 <div class="space-y-2 w-1/3">
                                     <x-input-label for="product_images" value="Upload Product Photo" class="!text-lg" />
+                                    <img :src="selectedValue.image" width="400">
                                     <x-text-input id="product_images" name="product_images" type="file"
                                         placeholder="Insert File"
                                         x-bind:value="isEdit ? selectedValue.product_images : ''" class="!py-2 !px-3" />

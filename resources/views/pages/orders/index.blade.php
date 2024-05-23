@@ -8,19 +8,10 @@
         selectedValue: ''
     }">
         <h2 class="mb-5 text-3xl font-medium">
-            Product Management
+            Order Transactions ({{ $title }})
         </h2>
         <div
             class="rounded-sm border border-stroke bg-white px-5 py-6 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5">
-            <div>
-                {{-- searching input --}}
-                <div class="flex justify-between mb-5">
-                    <a @click="modalCreate = true, isEdit = false"
-                        class="text-sm cursor-pointer rounded-full border border-primary bg-primary py-2 px-5 font-medium text-white transition hover:bg-opacity-90">
-                        Add New
-                    </a>
-                </div>
-            </div>
             <div class="max-w-full overflow-x-auto">
                 <table class="w-full table-auto">
                     <thead>
@@ -29,19 +20,22 @@
                                 No
                             </th>
                             <th class="min-w-[100px] px-4 py-4 font-medium text-black dark:text-white">
+                                Date
+                            </th>
+                            <th class="min-w-[100px] px-4 py-4 font-medium text-black dark:text-white">
                                 Image
                             </th>
                             <th class="min-w-[100px] px-4 py-4 font-medium text-black dark:text-white">
-                                Name
+                                Invoice
                             </th>
                             <th class="min-w-[100px] px-4 py-4 font-medium text-black dark:text-white">
-                                Category
+                                Total Item
                             </th>
                             <th class="min-w-[100px] px-4 py-4 font-medium text-black dark:text-white">
-                                Price
+                                Product
                             </th>
                             <th class="min-w-[100px] px-4 py-4 font-medium text-black dark:text-white">
-                                Stock
+                                Qty
                             </th>
                             <th class="px-4 py-4 font-medium text-black dark:text-white">
                                 Actions
@@ -49,7 +43,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($products as $item)
+                        @foreach ($orders as $item)
                             <tr class="bg-slate-100/25">
                                 <td class="border border-[#eee] px-4 py-2 pl-9 dark:border-strokedark xl:pl-11">
                                     <h5 class="font-medium text-black dark:text-white">
@@ -57,33 +51,49 @@
                                     </h5>
                                 </td>
                                 <td class="border border-[#eee] px-4 py-2 dark:border-strokedark">
-                                    <img src="{{ asset($item->productImages[0]->image_path) }}"
-                                        alt="{{ $item->name }}" class="w-20 h-20 object-cover rounded-lg">
+                                    <p class="text-black dark:text-white text-sm">
+                                        {{ $item->created_at->format('d M Y H:i') }}
+                                    </p>
+                                </td>
+                                <td class="border border-[#eee] px-4 py-2 dark:border-strokedark">
+                                    <img src="{{ asset($item->details[0]->product->productImages[0]->image_path) }}"
+                                        alt="{{ $item->invoice }}" class="w-20 h-20 object-cover rounded-lg">
                                 </td>
                                 <td class="border border-[#eee] px-4 py-2 dark:border-strokedark">
                                     <p class="text-black dark:text-white">
-                                        {{ $item->name }}
+                                        {{ $item->invoice_code }}
                                     </p>
                                 </td>
                                 <td class="border border-[#eee] px-4 py-2 dark:border-strokedark">
                                     <p class="text-black dark:text-white">
-                                        {{ $item->category->name }}
+                                        {{ count($item->details) }}
                                     </p>
                                 </td>
                                 <td class="border border-[#eee] px-4 py-2 dark:border-strokedark">
                                     <p class="text-black dark:text-white">
-                                        {{ $item->price }}
+                                        {{ $item->details[0]->product->name }}
+                                        @if (count($item->details) > 1)
+                                            ,<br>
+                                            <span class="text-primary text-sm">+{{ count($item->details) - 1 }} other
+                                                product</span>
+                                        @endif
                                     </p>
                                 </td>
                                 <td class="border border-[#eee] px-4 py-2 dark:border-strokedark">
                                     <p class="text-black dark:text-white">
-                                        {{ $item->stock }}
+                                        {{ $item->details[0]->quantity }}
+                                        @if (count($item->details) > 1)
+                                            ,<br>
+                                            <span class="text-primary text-sm">+{{ count($item->details) - 1 }} other
+                                                quantity</span>
+                                        @endif
                                     </p>
                                 </td>
+
                                 <td class="border-b border-[#eee] px-4 py-5 dark:border-strokedark">
                                     <div class="flex items-center space-x-3.5">
                                         <button type="submit" class="hover:text-primary"
-                                            @click="confirmUrl = '{{ route('admin.products.destroy', $item->id) }}', document.querySelector('.confirmModal').classList.remove('hidden') ">
+                                            @click="confirmUrl = '{{ route('admin.orders.destroy', $item->id) }}', document.querySelector('.confirmModal').classList.remove('hidden') ">
                                             <svg class="fill-current" width="18" height="18" viewBox="0 0 18 18"
                                                 fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path
@@ -100,15 +110,14 @@
                                                     fill="" />
                                             </svg>
                                         </button>
-                                        <button class="hover:text-primary"
-                                            @click="isEdit = true, selectedValue = { id: '{{ $item->id }}', name: '{{ $item->name }}', category_id: '{{ $item->category_id }}', price: '{{ $item->price }}', stock: '{{ $item->stock }}', size: '{{ $item->size }}', color: '{{ $item->color }}', description: '{{ $item->description }}', image: '{{ asset($item->productImages[0]->image_path) }}' }, modalCreate = true">
+                                        <a href="{{ route('admin.orders.show',$item->id) }}" class="hover:text-primary" >
                                             <svg class="fill-current" width="16" height="16"
                                                 xmlns="http://www.w3.org/2000/svg"
                                                 viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
                                                 <path
                                                     d="M471.6 21.7c-21.9-21.9-57.3-21.9-79.2 0L362.3 51.7l97.9 97.9 30.1-30.1c21.9-21.9 21.9-57.3 0-79.2L471.6 21.7zm-299.2 220c-6.1 6.1-10.8 13.6-13.5 21.9l-29.6 88.8c-2.9 8.6-.6 18.1 5.8 24.6s15.9 8.7 24.6 5.8l88.8-29.6c8.2-2.7 15.7-7.4 21.9-13.5L437.7 172.3 339.7 74.3 172.4 241.7zM96 64C43 64 0 107 0 160V416c0 53 43 96 96 96H352c53 0 96-43 96-96V320c0-17.7-14.3-32-32-32s-32 14.3-32 32v96c0 17.7-14.3 32-32 32H96c-17.7 0-32-14.3-32-32V160c0-17.7 14.3-32 32-32h96c17.7 0 32-14.3 32-32s-14.3-32-32-32H96z" />
                                             </svg>
-                                        </button>
+                                        </a>
                                     </div>
                                 </td>
                             </tr>
@@ -117,7 +126,6 @@
                 </table>
             </div>
         </div>
-        @include('pages.products.modal-create')
         @include('partials.confirm')
     </div>
 </x-dashboard-layout>

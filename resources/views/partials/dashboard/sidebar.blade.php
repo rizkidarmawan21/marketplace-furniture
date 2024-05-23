@@ -23,6 +23,52 @@
         <nav class="mt-5 px-4 py-4 lg:mt-9 lg:px-6" x-data="{ selected: $persist('Dashboard') }">
             <!-- Menu Group -->
             <div>
+                <h3 class="mb-4 ml-4 text-sm font-medium text-bodydark2">TRANSAKSI
+                </h3>
+
+                <ul class="mb-6 flex flex-col gap-1.5">
+                    <x-dashboard.sidebar.single-list :active="request()->routeIs('admin.orders.index') && request('status') == null" label="Products" :url="route('admin.orders.index')">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" width="18" height="18"
+                            class="fill-current">
+                            <path
+                                d="M36.8 192H603.2c20.3 0 36.8-16.5 36.8-36.8c0-7.3-2.2-14.4-6.2-20.4L558.2 21.4C549.3 8 534.4 0 518.3 0H121.7c-16 0-31 8-39.9 21.4L6.2 134.7c-4 6.1-6.2 13.2-6.2 20.4C0 175.5 16.5 192 36.8 192zM64 224V384v80c0 26.5 21.5 48 48 48H336c26.5 0 48-21.5 48-48V384 224H320V384H128V224H64zm448 0V480c0 17.7 14.3 32 32 32s32-14.3 32-32V224H512z" />
+                        </svg>
+                        Semua
+                    </x-dashboard.sidebar.single-list>
+
+                    <x-dashboard.sidebar.single-list :active="request()->routeIs('admin.orders.index') && request('status') == 'pending'" :url="route('admin.orders.index', ['status' => 'pending'])">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="18" height="18"
+                            class="fill-current">
+                            <path
+                                d="M160 112c0-35.3 28.7-64 64-64s64 28.7 64 64v48H160V112zm-48 48H48c-26.5 0-48 21.5-48 48V416c0 53 43 96 96 96H352c53 0 96-43 96-96V208c0-26.5-21.5-48-48-48H336V112C336 50.1 285.9 0 224 0S112 50.1 112 112v48zm24 48a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm152 24a24 24 0 1 1 48 0 24 24 0 1 1 -48 0z" />
+                        </svg>
+                        Pending
+                    </x-dashboard.sidebar.single-list>
+                    <x-dashboard.sidebar.single-list :active="request()->routeIs('admin.orders.index') && request('status') == 'onprogress'" :url="route('admin.orders.index', ['status' => 'onprogress'])">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="18" height="18"
+                            class="fill-current">
+                            <path
+                                d="M160 112c0-35.3 28.7-64 64-64s64 28.7 64 64v48H160V112zm-48 48H48c-26.5 0-48 21.5-48 48V416c0 53 43 96 96 96H352c53 0 96-43 96-96V208c0-26.5-21.5-48-48-48H336V112C336 50.1 285.9 0 224 0S112 50.1 112 112v48zm24 48a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm152 24a24 24 0 1 1 48 0 24 24 0 1 1 -48 0z" />
+                        </svg>
+                        Dikemas
+                    </x-dashboard.sidebar.single-list>
+                    <x-dashboard.sidebar.single-list :active="request()->routeIs('admin.orders.index') && request('status') == 'sent'" :url="route('admin.orders.index', ['status' => 'sent'])">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="18" height="18"
+                            class="fill-current">
+                            <path
+                                d="M160 112c0-35.3 28.7-64 64-64s64 28.7 64 64v48H160V112zm-48 48H48c-26.5 0-48 21.5-48 48V416c0 53 43 96 96 96H352c53 0 96-43 96-96V208c0-26.5-21.5-48-48-48H336V112C336 50.1 285.9 0 224 0S112 50.1 112 112v48zm24 48a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm152 24a24 24 0 1 1 48 0 24 24 0 1 1 -48 0z" />
+                        </svg>
+                        Dikirim
+                    </x-dashboard.sidebar.single-list>
+                    <x-dashboard.sidebar.single-list :active="request()->routeIs('admin.orders.index') && request('status') == 'success'" :url="route('admin.orders.index', ['status' => 'success'])">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="18" height="18"
+                            class="fill-current">
+                            <path
+                                d="M160 112c0-35.3 28.7-64 64-64s64 28.7 64 64v48H160V112zm-48 48H48c-26.5 0-48 21.5-48 48V416c0 53 43 96 96 96H352c53 0 96-43 96-96V208c0-26.5-21.5-48-48-48H336V112C336 50.1 285.9 0 224 0S112 50.1 112 112v48zm24 48a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm152 24a24 24 0 1 1 48 0 24 24 0 1 1 -48 0z" />
+                        </svg>
+                        Selesai
+                    </x-dashboard.sidebar.single-list>
+                </ul>
                 <h3 class="mb-4 ml-4 text-sm font-medium text-bodydark2">PRODUCT MANAGEMENT</h3>
 
                 <ul class="mb-6 flex flex-col gap-1.5">

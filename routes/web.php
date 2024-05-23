@@ -10,6 +10,7 @@ use App\Http\Controllers\Main\MyOrderController;
 use App\Http\Controllers\Main\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
+use App\Http\Middleware\isAdmin;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -26,7 +27,7 @@ Route::get('/products/{product}', [ProductController::class, 'show'])->name('pro
 
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['auth', 'verified','isAdmin'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
 
@@ -44,6 +45,8 @@ Route::middleware('auth')->group(function () {
     Route::post('profile', [AuthController::class, 'updateProfile'])->name('profile.update');
     Route::put('profile/password', [PasswordController::class, 'update'])->name('profile.password.update');
     Route::get('profile/orders', [MyOrderController::class, 'index'])->name('my-orders.index');
+    Route::get('profile/orders/{transaction}', [MyOrderController::class, 'show'])->name('my-orders.show');
+    Route::post('profile/orders/{transaction}/received', [MyOrderController::class, 'received'])->name('my-orders.received');
 
     Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 

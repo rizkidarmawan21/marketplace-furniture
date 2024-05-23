@@ -63,7 +63,8 @@
                 @forelse ($transactions as $item)
                     <div class="item-cart border border-zinc-300 rounded-lg">
                         <div class="mt-3 px-5 flex justify-between">
-                            <button class="bg-feprimary px-3 text-xs text-white rounded-md hover:bg-feprimary/50" onclick="window.open('https://wa.me/62895361882082', '_blank')">
+                            <button class="bg-feprimary px-3 text-xs text-white rounded-md hover:bg-feprimary/50"
+                                onclick="window.open('https://wa.me/62895361882082', '_blank')">
                                 Hubungi Penjual
                             </button>
                             <h1 class="text-lg">
@@ -72,8 +73,9 @@
                         </div>
                         <div class="mt-3 px-5 mb-5 flex items-center justify-between">
                             <div class="flex w-[80%] gap-4 items-center">
-                                <img src="https://res.cloudinary.com/ruparupa-com/image/upload/w_400,h_400/f_auto,q_auto:eco/v1664809960/Products/10447967_1.jpg"
-                                    alt="" class="w-30 rounded-lg object-cover border border-[#E5E5E5]">
+                                <img src="{{ asset($item->details[0]->product->productImages[0]->image_path) }}"
+                                    alt=""
+                                    class="w-30 max-h-50 rounded-lg object-cover border border-[#E5E5E5]">
                                 <div class="w-1/2 self-start">
                                     <h3 class="text-lg line-clamp-2">
                                         {{ $item->details[0]->product->name }}
@@ -98,7 +100,7 @@
 
                                         @case('sent')
                                             <label class="mt-1 text-xs bg-teal-500 text-white px-3 py-0.5 rounded-[4px]">
-                                                Success
+                                                Sent
                                             </label>
                                         @break
 
@@ -118,14 +120,17 @@
                             </div>
                             <div class="flex items-center justify-center gap-3">
                                 <p class="mt-3 text-lg text-feprimary font-semibold">
-                                    2 x Rp. 1.000.000
+                                    {{ $item->details[0]->quantity }} x Rp.
+                                    {{ number_format($item->details[0]->price, 0, ',', '.') }}
                                 </p>
                             </div>
                         </div>
                         <div class="bg-slate-50 text-center py-1">
-                            <a href="" class="text-xs">
-                                Produk Lainnya
-                            </a>
+                            @if ($item->details->count() > 1)
+                                <a href="{{ route('my-orders.show', $item->id) }}" class="text-xs">
+                                    Produk Lainnya
+                                </a>
+                            @endif
                         </div>
                         <div class="py-2 px-5 flex items-center justify-between border-t border-zinc-300">
                             <div>
@@ -135,13 +140,26 @@
                                         Bayar Sekarang
                                     </button>
                                 @endif
-                                <button
+                                @if ($item->status == 'sent')
+                                    <form action="{{ route('my-orders.received',$item->id) }}" method="post" class="inline-block">
+                                        @csrf
+                                        <input type="hidden" name="received" value="1">
+                                        <button
+                                            class="bg-feprimary px-3 py-2 text-xs text-white rounded-md hover:bg-feprimary/50">
+                                            Pesanan Diterima
+                                        </button>
+                                    </form>
+                                @endif
+                                <a href="{{ route('my-orders.show', $item->id) }}"
                                     class="border border-feprimary px-3 py-2 text-xs text-feprimary rounded-md hover:bg-feprimary/20">
                                     Lihat Detail
-                                </button>
+                                </a>
                             </div>
                             <h1 class="text-sm">
-                                Total Belanja: <span class="text-sm font-semibold">Rp. 2.000.000</span>
+                                Total Belanja:
+                                <span class="text-sm font-semibold">
+                                    Rp. {{ number_format($item->total_price, 0, ',', '.') }}
+                                </span>
                             </h1>
                         </div>
                     </div>
@@ -157,4 +175,5 @@
         </div>
         </div>
         @include('partials.main.footer')
+
     </x-app-layout>

@@ -32,4 +32,28 @@ class MyOrderController extends Controller
             'countTransactions' => collect($countTransactions)
         ]);
     }
+
+    public function show(Transaction $transaction)
+    {
+        return view('pages.main.detail-history', [
+            'transaction' => $transaction
+        ]);
+    }
+
+    public function received(Request $request, Transaction $transaction)
+    {
+        $request->validate([
+            'received' => 'required|boolean'
+        ]);
+
+        if ($transaction->status !== 'sent') {
+            return back()->with('failed', 'Pesanan belum dikirimkan');
+        }
+
+        $transaction->update([
+            'status' => $request->received ? 'success' : 'sent'
+        ]);
+
+        return back()->with('success', 'Pesanan telah diterima');
+    }
 }
