@@ -193,4 +193,8 @@ class CheckoutController extends Controller
             return redirect()->route('main.home')->with('error', 'Terjadi kesalahan saat melakukan checkout. Silakan coba lagi.');
         }
     }
+
+    public function successPayment(){
+        return view('pages.main.success-checkout');
+    }
 }

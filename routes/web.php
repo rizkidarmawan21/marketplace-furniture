@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\MidtransController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Main\AuthController;
@@ -40,16 +41,19 @@ Route::middleware('auth')->group(function () {
     Route::get('checkout', [CheckoutController::class, 'index'])->name('checkout.index');
     Route::post('checkout/save-item', [CheckoutController::class, 'saveItemForCheckout'])->name('checkout.save-item');
     Route::post('checkout/store', [CheckoutController::class, 'store'])->name('checkout.store');
-
+    
     Route::get('profile', [AuthController::class, 'profile'])->name('profile');
     Route::post('profile', [AuthController::class, 'updateProfile'])->name('profile.update');
     Route::put('profile/password', [PasswordController::class, 'update'])->name('profile.password.update');
     Route::get('profile/orders', [MyOrderController::class, 'index'])->name('my-orders.index');
     Route::get('profile/orders/{transaction}', [MyOrderController::class, 'show'])->name('my-orders.show');
     Route::post('profile/orders/{transaction}/received', [MyOrderController::class, 'received'])->name('my-orders.received');
-
+    
     Route::post('logout', [AuthController::class, 'logout'])->name('logout');
-
-
+    
+    
     require __DIR__ . '/admin.php';
 });
+
+Route::get('checkout/payment-success', [CheckoutController::class, 'successPayment'])->name('checkout.finish');
+Route::post('midtrans/callback', [MidtransController::class, 'callback']);
