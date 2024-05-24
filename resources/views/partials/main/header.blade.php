@@ -48,7 +48,7 @@
 
             @auth
                 <div class="space-x-7 flex items-center">
-                    <a href="" class="px-6 text-lg hover:text-feprimary">
+                    <a href="{{ route('articles.index') }}" class="px-6 text-lg hover:text-feprimary">
                         Artikel
                     </a>
                     <div class="relative" x-data="{ show: false }">
