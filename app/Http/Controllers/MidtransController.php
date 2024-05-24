@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\MidtranCallbackLog;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Midtrans\Config;
 use Midtrans\Notification;
 
@@ -17,76 +18,96 @@ class MidtransController extends Controller
      */
     public function callback(Request $request)
     {
-        // Set konfigurasi midtrans
-        Config::$serverKey = config('services.midtrans.serverKey');
-        Config::$isProduction = config('services.midtrans.isProduction');
-        Config::$isSanitized = config('services.midtrans.isSanitized');
-        Config::$is3ds = config('services.midtrans.is3ds');
+        try {
 
-        // Buat instance midtrans notification
-        $notification = new Notification();
+            DB::beginTransaction();
+            // Set konfigurasi midtrans
+            Config::$serverKey = config('services.midtrans.serverKey');
+            Config::$isProduction = config('services.midtrans.isProduction');
+            Config::$isSanitized = config('services.midtrans.isSanitized');
+            Config::$is3ds = config('services.midtrans.is3ds');
 
-        // Assign ke variable untuk memudahkan coding
-        $status = $notification->transaction_status;
-        $type = $notification->payment_type;
-        $fraud = $notification->fraud_status;
-        $order_id = $notification->order_id;
+            // Buat instance midtrans notification
+            $notification = new Notification();
 
-        // Cari transaksi berdasarkan code
-        $transaction = Transaction::where('invoice_code', $order_id)->first();
+            // Assign ke variable untuk memudahkan coding
+            $status = $notification->transaction_status;
+            $type = $notification->payment_type;
+            $fraud = $notification->fraud_status;
+            $order_id = $notification->order_id;
 
-        if (is_null($transaction)) {
-            return response()->json([
-                'meta' => [
-                    'code' => 404,
-                    'message' => 'Transaction not found'
-                ]
-            ]);
-        }
+            // Cari transaksi berdasarkan code
+            $transaction = Transaction::where('invoice_code', $order_id)->first();
 
-        // set log callback
-        $log = [
-            'url' => $request->fullUrl(),
-            'request' => json_encode($request->all()),
-            'order_id' => $order_id,
-            'status_code' => $status,
-            'payment_type' => $type,
-        ];
+            if (is_null($transaction)) {
+                return response()->json([
+                    'meta' => [
+                        'code' => 404,
+                        'message' => 'Transaction not found'
+                    ]
+                ]);
+            }
 
-        MidtranCallbackLog::create($log);
+            // set log callback
+            $log = [
+                'url' => $request->fullUrl(),
+                'request' => json_encode($request->all()),
+                'order_id' => $order_id,
+                'status_code' => $status,
+                'payment_type' => $type,
+            ];
 
-        if ($transaction->status == 'Paid') {
+            MidtranCallbackLog::create($log);
+
+            if ($transaction->status == 'Paid') {
+                return response()->json([
+                    'meta' => [
+                        'code' => 200,
+                        'message' => 'Status paid'
+                    ]
+                ]);
+            }
+
+            // Handle notification status midtrans
+            if ($status == 'capture') {
+                if ($type == 'credit_card') {
+                    if ($fraud == 'challenge') {
+                        $transaction->status = 'pending';
+                    } else {
+                        $transaction->status = 'onprogress';
+                    }
+                }
+            } else if ($status == 'settlement') {
+                $transaction->status = 'onprogress';
+            } else if ($status == 'pending') {
+                $transaction->status = 'pending';
+            } else if ($status == 'deny') {
+                $transaction->status = 'failed';
+            } else if ($status == 'expire') {
+                $transaction->status = 'failed';
+            } else if ($status == 'failed') {
+                $transaction->status = 'failed';
+            }
+
+            // Simpan transaksi
+            $transaction->save();
+
+            DB::commit();
             return response()->json([
                 'meta' => [
                     'code' => 200,
-                    'message' => 'Status paid'
+                    'message' => 'Callback success'
+                ]
+            ]);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json([
+                'meta' => [
+                    'code' => 500,
+                    'message' => $e->getMessage()
                 ]
             ]);
         }
-
-        // Handle notification status midtrans
-        if ($status == 'capture') {
-            if ($type == 'credit_card') {
-                if ($fraud == 'challenge') {
-                    $transaction->status = 'pending';
-                } else {
-                    $transaction->status = 'onprogress';
-                }
-            }
-        } else if ($status == 'settlement') {
-            $transaction->status = 'onprogress';
-        } else if ($status == 'pending') {
-            $transaction->status = 'pending';
-        } else if ($status == 'deny') {
-            $transaction->status = 'failed';
-        } else if ($status == 'expire') {
-            $transaction->status = 'failed';
-        } else if ($status == 'failed') {
-            $transaction->status = 'failed';
-        }
-
-        // Simpan transaksi
-        $transaction->save();
     }
 
     /**
