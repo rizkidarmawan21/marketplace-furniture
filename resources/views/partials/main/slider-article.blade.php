@@ -61,7 +61,7 @@
                                                 </time>
                                             </div>
                                         </div>
-                                        <p class="mt-2 md:text-md text-sm">
+                                        <p class="mt-2 md:text-md text-sm line-clamp-3">
                                             {{ \Illuminate\Support\Str::limit(strip_tags($item->content), 100, '...') }}
                                         </p>
                                         <br>
