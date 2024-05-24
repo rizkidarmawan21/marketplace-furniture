@@ -30,8 +30,12 @@
             {{-- Button --}}
             {{-- Login, Register, Cart, User --}}
 
-            @guest
-                <div class="space-x-2">
+            <div class="space-x-2">
+                <a href=""
+                    class="px-6 text-lg hover:text-feprimary">
+                    Artikel
+                </a>
+                @guest
                     <a href="{{ route('login') }}"
                         class="border border-feprimary bg-feprimary text-white px-6 py-2 rounded-xl hover:bg-feprimary/70 transition duration-300">
                         Masuk
@@ -40,8 +44,8 @@
                         class="border border-feprimary text-feprimary px-6 py-2 rounded-xl hover:bg-feprimary/70 transition duration-300">
                         Daftar
                     </a>
-                </div>
-            @endguest
+                @endguest
+            </div>
 
             @auth
                 <div class="space-x-7 flex items-center">

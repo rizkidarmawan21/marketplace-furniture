@@ -6,6 +6,8 @@
     @include('partials.main.most-popular')
 
     @include('partials.main.recomendation')
+    
+    @include('partials.main.slider-article')
 
     @include('partials.main.footer')
 </x-app-layout>
