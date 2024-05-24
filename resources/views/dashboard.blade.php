@@ -18,20 +18,10 @@
             <div class="mt-4 flex items-end justify-between">
                 <div>
                     <h4 class="text-title-md font-bold text-black dark:text-white">
-                        $3.456K
+                        {{ $totalOrders }}
                     </h4>
-                    <span class="text-sm font-medium">Total views</span>
+                    <span class="text-sm font-medium">Total Orders</span>
                 </div>
-
-                <span class="flex items-center gap-1 text-sm font-medium text-meta-3">
-                    0.43%
-                    <svg class="fill-meta-3" width="10" height="11" viewBox="0 0 10 11" fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M4.35716 2.47737L0.908974 5.82987L5.0443e-07 4.94612L5 0.0848689L10 4.94612L9.09103 5.82987L5.64284 2.47737L5.64284 10.0849L4.35716 10.0849L4.35716 2.47737Z"
-                            fill="" />
-                    </svg>
-                </span>
             </div>
         </div>
         <!-- Card Item End -->
@@ -57,20 +47,10 @@
             <div class="mt-4 flex items-end justify-between">
                 <div>
                     <h4 class="text-title-md font-bold text-black dark:text-white">
-                        $45,2K
+                        Rp. {{ number_format($totalProfit, 0, ',', '.') }}
                     </h4>
                     <span class="text-sm font-medium">Total Profit</span>
                 </div>
-
-                <span class="flex items-center gap-1 text-sm font-medium text-meta-3">
-                    4.35%
-                    <svg class="fill-meta-3" width="10" height="11" viewBox="0 0 10 11" fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M4.35716 2.47737L0.908974 5.82987L5.0443e-07 4.94612L5 0.0848689L10 4.94612L9.09103 5.82987L5.64284 2.47737L5.64284 10.0849L4.35716 10.0849L4.35716 2.47737Z"
-                            fill="" />
-                    </svg>
-                </span>
             </div>
         </div>
         <!-- Card Item End -->
@@ -93,20 +73,10 @@
             <div class="mt-4 flex items-end justify-between">
                 <div>
                     <h4 class="text-title-md font-bold text-black dark:text-white">
-                        2.450
+                        {{ $totalProduct }}
                     </h4>
                     <span class="text-sm font-medium">Total Product</span>
                 </div>
-
-                <span class="flex items-center gap-1 text-sm font-medium text-meta-3">
-                    2.59%
-                    <svg class="fill-meta-3" width="10" height="11" viewBox="0 0 10 11" fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M4.35716 2.47737L0.908974 5.82987L5.0443e-07 4.94612L5 0.0848689L10 4.94612L9.09103 5.82987L5.64284 2.47737L5.64284 10.0849L4.35716 10.0849L4.35716 2.47737Z"
-                            fill="" />
-                    </svg>
-                </span>
             </div>
         </div>
         <!-- Card Item End -->
@@ -132,22 +102,64 @@
             <div class="mt-4 flex items-end justify-between">
                 <div>
                     <h4 class="text-title-md font-bold text-black dark:text-white">
-                        3.456
+                        {{ $totalUser }}
                     </h4>
                     <span class="text-sm font-medium">Total Users</span>
                 </div>
-
-                <span class="flex items-center gap-1 text-sm font-medium text-meta-5">
-                    0.95%
-                    <svg class="fill-meta-5" width="10" height="11" viewBox="0 0 10 11" fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M5.64284 7.69237L9.09102 4.33987L10 5.22362L5 10.0849L-8.98488e-07 5.22362L0.908973 4.33987L4.35716 7.69237L4.35716 0.0848701L5.64284 0.0848704L5.64284 7.69237Z"
-                            fill="" />
-                    </svg>
-                </span>
             </div>
         </div>
-        <!-- Card Item End -->
+
+        <div
+            class="rounded-sm border border-stroke bg-orange-200 px-7.5 py-6 shadow-default dark:border-strokedark dark:bg-boxdark">
+            <div class="mt-4 flex items-end justify-between">
+                <div>
+                    <h4 class="text-title-md font-bold text-black dark:text-white">
+                        {{ $totalOrderPending }}
+                    </h4>
+                    <span class="text-sm font-medium">
+                        Order Pending
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div
+            class="rounded-sm border border-stroke bg-yellow-200 px-7.5 py-6 shadow-default dark:border-strokedark dark:bg-boxdark">
+            <div class="mt-4 flex items-end justify-between">
+                <div>
+                    <h4 class="text-title-md font-bold text-black dark:text-white">
+                        {{ $totalOrderOnProcess }}
+                    </h4>
+                    <span class="text-sm font-medium">
+                        Order On Process
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div
+            class="rounded-sm border border-stroke bg-green-300 px-7.5 py-6 shadow-default dark:border-strokedark dark:bg-boxdark">
+            <div class="mt-4 flex items-end justify-between">
+                <div>
+                    <h4 class="text-title-md font-bold text-black dark:text-white">
+                        {{ $totalOrderSent }}
+                    </h4>
+                    <span class="text-sm font-medium">
+                        Order Shipping
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div
+            class="rounded-sm border border-stroke bg-teal-300 px-7.5 py-6 shadow-default dark:border-strokedark dark:bg-boxdark">
+            <div class="mt-4 flex items-end justify-between">
+                <div>
+                    <h4 class="text-title-md font-bold text-black dark:text-white">
+                        {{ $totalOrderSuccess }}
+                    </h4>
+                    <span class="text-sm font-medium">
+                        Order Succes
+                    </span>
+                </div>
+            </div>
+        </div>
     </div>
 </x-dashboard-layout>

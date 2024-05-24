@@ -23,6 +23,16 @@
         <nav class="mt-5 px-4 py-4 lg:mt-9 lg:px-6" x-data="{ selected: $persist('Dashboard') }">
             <!-- Menu Group -->
             <div>
+                <ul class="mb-6 flex flex-col gap-1.5">
+                    <x-dashboard.sidebar.single-list :active="request()->routeIs('dashboard')" label="Dashboard" :url="route('dashboard')">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="18" height="18"
+                            class="fill-current">
+                            <path
+                                d="M0 96C0 60.7 28.7 32 64 32H448c35.3 0 64 28.7 64 64V416c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V96zm64 64V416H224V160H64zm384 0H288V416H448V160z" />
+                        </svg>
+                        Dashboard
+                    </x-dashboard.sidebar.single-list>
+                </ul>
                 <h3 class="mb-4 ml-4 text-sm font-medium text-bodydark2">TRANSAKSI
                 </h3>
 

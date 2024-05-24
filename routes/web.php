@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\PasswordController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Main\ArticleController;
 use App\Http\Controllers\Main\AuthController;
 use App\Http\Controllers\Main\CartController;
@@ -29,9 +30,7 @@ Route::get('/products/{product}', [ProductController::class, 'show'])->name('pro
 Route::get('articles', [ArticleController::class, 'index'])->name('articles.index');
 Route::get('articles/{article}', [ArticleController::class, 'show'])->name('articles.show');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified', 'isAdmin'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified', 'isAdmin'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
 
