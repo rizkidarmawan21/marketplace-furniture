@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Main;
 
 use App\Http\Controllers\Controller;
+use App\Models\Article;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -20,6 +21,11 @@ class HomeController extends Controller
             ->limit(10)
             ->get();
 
-        return view('pages.main.home', compact('productPopular', 'productRecomendation'));
+        // get 5 latest articles
+        $articles = Article::orderBy('created_at', 'DESC')
+            ->limit(5)
+            ->get();
+
+        return view('pages.main.home', compact('productPopular', 'productRecomendation','articles'));
     }
 }

@@ -72,7 +72,7 @@ class ProductController extends Controller
         } catch (\Exception $e) {
             DB::rollBack();
 
-            return redirect()->route('admin.products.index')->with('error', 'Product failed to create.');
+            return redirect()->route('admin.products.index')->with('failed', 'Product failed to create.');
         }
     }
 
@@ -143,7 +143,7 @@ class ProductController extends Controller
         } catch (\Exception $e) {
             DB::rollBack();
 
-            return redirect()->route('admin.products.index')->with('error', 'Product failed to update.');
+            return redirect()->route('admin.products.index')->with('failed', 'Product failed to update.');
         }
     }
 
@@ -161,7 +161,7 @@ class ProductController extends Controller
         } catch (\Exception $e) {
             DB::rollBack();
 
-            return redirect()->route('admin.products.index')->with('error', 'Product failed to delete.');
+            return redirect()->route('admin.products.index')->with('failed', 'Product failed to delete.');
         }
     }
 }

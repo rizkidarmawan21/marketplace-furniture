@@ -1,4 +1,4 @@
-<div class="flex justify-center lg:mx-52 mt-10">
+<div class="flex justify-center  mt-10">
     {{-- Carousel Banner --}}
 
     <div class="w-[90%] lg:container">
@@ -20,11 +20,10 @@
                 <div class="ml-19 w-[calc(100%-76px)] h-full overflow-x-auto no-scrollbar">
                     <div class="flex gap-5 w-full h-full " x-data="">
                         @forelse ($productPopular as $item)
-                            <div 
-                                @click="
+                            <div @click="
                                   window.location.href = '{{ route('products.show', $item->id) }}'
                                 "
-                                class="card w-70 h-full flex-shrink-0  bg-white border border-[#CACACA] rounded-xl hover:cursor-pointer">
+                                class="card lg:w-55 xl:w-60 h-full flex-shrink-0  bg-white border border-[#CACACA] rounded-xl hover:cursor-pointer">
                                 <img src="{{ asset($item->productImages[0]->image_path) }}" alt=""
                                     class="w-full h-[55%] object-cover rounded-t-xl">
                                 <div class="border-t-2 border-feprimary px-5 py-2">

@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\API\MidtransController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Main\AuthController;
@@ -9,6 +8,7 @@ use App\Http\Controllers\Main\CheckoutController;
 use App\Http\Controllers\Main\HomeController;
 use App\Http\Controllers\Main\MyOrderController;
 use App\Http\Controllers\Main\ProductController;
+use App\Http\Controllers\MidtransController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\isAdmin;
@@ -56,4 +56,4 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('checkout/payment-success', [CheckoutController::class, 'successPayment'])->name('checkout.finish');
-Route::post('midtrans/callback', [MidtransController::class, 'callback']);
+

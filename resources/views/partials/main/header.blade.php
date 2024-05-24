@@ -1,4 +1,4 @@
-<header class="flex justify-center lg:mx-52">
+<header class="flex justify-center ">
     <div class="w-[90%] lg:container py-5 flex justify-between items-center">
         <a href="{{ route('home') }}">
             <img src="{{ asset('assets/icons/logo.png') }}" class="w-35" alt="">
@@ -31,11 +31,10 @@
             {{-- Login, Register, Cart, User --}}
 
             <div class="space-x-2">
-                <a href=""
-                    class="px-6 text-lg hover:text-feprimary">
-                    Artikel
-                </a>
                 @guest
+                    <a href="" class="px-6 text-lg hover:text-feprimary">
+                        Artikel
+                    </a>
                     <a href="{{ route('login') }}"
                         class="border border-feprimary bg-feprimary text-white px-6 py-2 rounded-xl hover:bg-feprimary/70 transition duration-300">
                         Masuk
@@ -49,6 +48,9 @@
 
             @auth
                 <div class="space-x-7 flex items-center">
+                    <a href="" class="px-6 text-lg hover:text-feprimary">
+                        Artikel
+                    </a>
                     <div class="relative" x-data="{ show: false }">
                         <button @click="show = !show">
                             <svg width="23" height="31" viewBox="0 0 30 31" fill="none"

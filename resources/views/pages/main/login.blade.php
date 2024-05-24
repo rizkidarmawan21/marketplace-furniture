@@ -70,7 +70,7 @@
                                         <x-input-error :messages="$errors->get('password')" class="mt-2" />
                                     </div>
                                     <div class="mb-5">
-                                        <a href="" class="underline text-sky-600">
+                                        <a href="{{ route('register') }}" class="underline text-sky-600">
                                             Belum punya akun? Daftar disini
                                         </a>
                                     </div>

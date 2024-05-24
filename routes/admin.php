@@ -1,11 +1,11 @@
 <?php
 
+use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
-use App\Http\Middleware\isAdmin;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('admin')->name('admin.')->middleware('isAdmin')->group(function () {
@@ -21,4 +21,6 @@ Route::prefix('admin')->name('admin.')->middleware('isAdmin')->group(function ()
     Route::resource('products', ProductController::class)->middleware('auth');
 
     Route::resource('orders', OrderController::class)->middleware('auth');
+
+    Route::resource('articles', ArticleController::class)->middleware('auth');
 });

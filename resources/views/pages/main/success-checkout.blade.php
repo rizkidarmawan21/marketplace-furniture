@@ -94,10 +94,10 @@
                 Pesanan Anda telah diterima dan akan segera diproses.
             </p>
             <div class="flex gap-3">
-                <a href="" class="bg-feprimary text-white px-4 py-2 rounded-lg mt-10 hover:bg-primary-dark">
+                <a href="{{ route('home') }}" class="bg-feprimary text-white px-4 py-2 rounded-lg mt-10 hover:bg-primary-dark">
                     Lanjut Belanja
                 </a>
-                <a href="" class="bg-feprimary text-white px-4 py-2 rounded-lg mt-10 hover:bg-primary-dark">
+                <a href="{{ route('my-orders.index') }}" class="bg-feprimary text-white px-4 py-2 rounded-lg mt-10 hover:bg-primary-dark">
                     Lihat Pesanan
                 </a>
             </div>

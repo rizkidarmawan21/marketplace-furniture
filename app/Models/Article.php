@@ -10,4 +10,9 @@ class Article extends Model
 {
     use HasFactory, SoftDeletes;
     protected $guarded = [];
+
+    public function author()
+    {
+        return $this->belongsTo(User::class, 'author_id');
+    }
 }

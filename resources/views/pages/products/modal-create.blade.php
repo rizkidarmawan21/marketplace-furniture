@@ -12,7 +12,7 @@
                             <h3 class="text-2xl font-medium leading-6 text-gray-900 dark:text-white" id="modal-title">
                                 Create Product
                             </h3>
-                            <button class="hover:bg-slate-100 p-2 rounded-lg" @click="modalCreate = false">
+                            <button class="hover:bg-slate-100 p-2 rounded-lg" @click="modalCreate = false, isEdit = false , selectedValue = {} ">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 fill-current"
                                     viewBox="0 0 384 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
                                     <path
@@ -44,7 +44,8 @@
                                             <option value="">Select Category</option>
                                             @foreach ($categories as $category)
                                                 <option value="{{ $category->id }}"
-                                                    x-bind:selected="isEdit ? selectedValue?.category_id == {{ $category->id }} : '{{ old('category_id') }}'">
+                                                    x-bind:selected="isEdit ? selectedValue?.category_id == {{ $category->id }} :
+                                                        '{{ old('category_id') }}'">
                                                     {{ $category->name }}</option>
                                             @endforeach
                                         </select>
@@ -61,14 +62,16 @@
                                     <div class="space-y-2">
                                         <x-input-label for="price" value="Price" class="!text-lg" />
                                         <x-text-input id="price" name="price" type="number"
-                                            placeholder="Insert Price" x-bind:value="isEdit ? selectedValue.price : '{{ old('price') }}'"
+                                            placeholder="Insert Price"
+                                            x-bind:value="isEdit ? selectedValue.price : '{{ old('price') }}'"
                                             class="!py-2 !px-3" />
                                         <x-input-error :messages="$errors->get('price')" class="mt-2" />
                                     </div>
                                     <div class="space-y-2">
                                         <x-input-label for="stock" value="Stock" class="!text-lg" />
                                         <x-text-input id="stock" name="stock" type="number"
-                                            placeholder="Insert Stock" x-bind:value="isEdit ? selectedValue.stock : '{{ old('stock') }}'"
+                                            placeholder="Insert Stock"
+                                            x-bind:value="isEdit ? selectedValue.stock : '{{ old('stock') }}'"
                                             class="!py-2 !px-3" />
                                         <x-input-error :messages="$errors->get('stock')" class="mt-2" />
                                     </div>
@@ -76,21 +79,44 @@
                                         <x-input-label for="size" value="Size" class="!text-lg" />
                                         <x-text-input id="size" name="size" type="text"
                                             placeholder="Ex: 20cm x 20cm x 20cm"
-                                            x-bind:value="isEdit ? selectedValue.size : '{{ old('size') }}'" class="!py-2 !px-3" />
+                                            x-bind:value="isEdit ? selectedValue.size : '{{ old('size') }}'"
+                                            class="!py-2 !px-3" />
                                         <x-input-error :messages="$errors->get('size')" class="mt-2" />
                                     </div>
                                     <div class="space-y-2">
                                         <x-input-label for="color" value="Color" class="!text-lg" />
                                         <x-text-input id="color" name="color" type="text"
-                                            placeholder="Insert color" x-bind:value="isEdit ? selectedValue.color : '{{ old('color') }}'"
+                                            placeholder="Insert color"
+                                            x-bind:value="isEdit ? selectedValue.color : '{{ old('color') }}'"
                                             class="!py-2 !px-3" />
                                         <x-input-error :messages="$errors->get('color')" class="mt-2" />
                                     </div>
                                     <div class="space-y-2 col-span-2">
                                         <x-input-label for="description" value="Description" class="!text-lg" />
-                                        <textarea name="description" id="" cols="30" rows="2"
+                                        {{-- <textarea name="description" id="" cols="30" rows="2"
                                             class="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary !py-2 !px-3" x-bind:value="isEdit ? selectedValue.description : '{{ old('description') }}'">
-                                        </textarea>
+                                        </textarea> --}}
+                                        <div x-init="$watch('selectedValue.description', value => {
+                                            const trixEditor = $refs.trixEditor;
+                                            if (trixEditor.editor) {
+                                                trixEditor.editor.loadHTML(value);
+                                            } else {
+                                                trixEditor.addEventListener('trix-initialize', () => {
+                                                    trixEditor.editor.loadHTML(value);
+                                                });
+                                            }
+                                        });
+                                        // Initialize the editor content
+                                        $nextTick(() => {
+                                            const trixEditor = $refs.trixEditor;
+                                            if (trixEditor.editor) {
+                                                trixEditor.editor.loadHTML(selectedValue.description);
+                                            }
+                                        });">
+                                            <input id="description" type="hidden" name="description"
+                                                x-bind:value="selectedValue.description" x-ref="descriptionInput">
+                                            <trix-editor input="description" x-ref="trixEditor"></trix-editor>
+                                        </div>
                                         <x-input-error :messages="$errors->get('description')" class="mt-2" />
                                     </div>
                                 </div>

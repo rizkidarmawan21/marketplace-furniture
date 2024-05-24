@@ -1,4 +1,4 @@
-<div class="flex justify-center lg:mx-52 mt-10">
+<div class="flex justify-center  mt-10">
     <div class="w-[90%] lg:container ">
         <div class="bg-feprimary p-10 text-white">
             <div class="w-1/2">

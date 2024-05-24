@@ -1,4 +1,4 @@
-<div class="flex justify-center lg:mx-52 mt-10">
+<div class="flex justify-center  mt-10">
     {{-- Carousel Banner --}}
 
     <div class="w-[90%] lg:container">

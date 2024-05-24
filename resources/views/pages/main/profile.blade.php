@@ -1,5 +1,5 @@
 <x-app-layout :headerSearch="false">
-    <div class="min-h-[calc(100vh-18rem)] justify-center lg:mx-52 mt-5">
+    <div class="min-h-[calc(100vh-18rem)] justify-center  mt-5">
         <x-slot name="header">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 {{ __('Profile') }}

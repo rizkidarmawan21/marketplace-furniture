@@ -1,5 +1,5 @@
 <x-app-layout :headerSearch="false">
-    <div class="min-h-[calc(100vh-18rem)] justify-center lg:mx-52 mt-5">
+    <div class="min-h-[calc(100vh-18rem)] justify-center  mt-5">
         <div class="flex items-center gap-3">
             <a href="{{ route('my-orders.index') }}">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="w-6 h-6 fill-current">

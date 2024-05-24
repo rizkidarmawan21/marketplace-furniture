@@ -1,6 +1,6 @@
 <x-app-layout>
-    <div class="flex min-h-[calc(100vh-18rem)] justify-center lg:mx-52 mt-15">
-        <div class="card w-full flex justify-between" x-data="{ itemSelected: [] }">
+    <div class="flex min-h-[calc(100vh-18rem)] justify-center  mt-15">
+        <div class="card w-full flex justify-between w-[90%] lg:container" x-data="{ itemSelected: [] }">
             <div class="w-[75%] border border-[#DCDCDC] rounded-xl">
                 {{-- debug itemSelected value --}}
                 {{-- <div x-text="itemSelected"></div> --}}
@@ -127,9 +127,9 @@
                                 @enderror
 
                                 <button :disabled="itemSelected.length == 0"
-                                    class="w-full bg-feprimary text-white text-lg font-semibold py-2 rounded-lg focus:outline-none" 
-                                    :class="itemSelected.length == 0 ? 'cursor-not-allowed bg-feprimary/70' : 'hover:bg-feprimary/70 transition duration-300'"
-                                    >
+                                    class="w-full bg-feprimary text-white text-lg font-semibold py-2 rounded-lg focus:outline-none"
+                                    :class="itemSelected.length == 0 ? 'cursor-not-allowed bg-feprimary/70' :
+                                        'hover:bg-feprimary/70 transition duration-300'">
                                     Buat Pesanan
                                 </button>
                             </form>

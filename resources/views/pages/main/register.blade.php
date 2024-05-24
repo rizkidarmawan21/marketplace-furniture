@@ -108,7 +108,7 @@
                                         <x-input-error :messages="$errors->get('password')" class="mt-2" />
                                     </div>
                                     <div class="mb-5">
-                                        <a href="" class="underline text-sky-600">
+                                        <a href="{{ route('login') }}" class="underline text-sky-600">
                                             Sudah punya akun? Masuk disini
                                         </a>
                                     </div>

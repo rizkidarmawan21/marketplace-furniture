@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="flex justify-center lg:mx-52 mt-5">
+    <div class="flex justify-center  mt-5">
         <div class="w-[90%] lg:container">
             <div>
                 <span>

@@ -1,4 +1,4 @@
-<div class="flex justify-center lg:mx-52 mt-10">
+<div class="flex justify-center  mt-10">
     {{-- Carousel Banner --}}
 
     <div class="w-[90%] lg:container">
@@ -16,10 +16,10 @@
             </div>
         </div>
         <div class="mt-5">
-            <div class="w-full grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-5 gap-6 place-content-center" x-data="">
+            <div class="w-full grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-7 place-content-start"
+                x-data="">
                 @forelse ($productRecomendation as $item)
-                    <div
-                        @click="
+                    <div @click="
                           window.location.href = '{{ route('products.show', $item->id) }}'
                         "
                         class="card lg:w-55 xl:w-60 h-full gap-2  bg-white border border-[#CACACA] rounded-xl hover:cursor-pointer">
