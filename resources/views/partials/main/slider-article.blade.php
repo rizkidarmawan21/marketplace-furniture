@@ -30,7 +30,7 @@
                     </p>
                 </div>
                 <div class="text-black">
-                    <a href="{{ route('products.index') }}" class="text-lg text-black hover:text-slate-400">
+                    <a href="{{ route('articles.index') }}" class="text-lg text-black hover:text-slate-400">
                         Lihat Selanjutnya
                     </a>
                 </div>
@@ -64,6 +64,11 @@
                                         <p class="mt-2 md:text-md text-sm">
                                             {{ \Illuminate\Support\Str::limit(strip_tags($item->content), 100, '...') }}
                                         </p>
+                                        <br>
+                                        <a href="{{ route('articles.show', $item->id) }}"
+                                            class="transition hover:text-feprimary">
+                                            Selengkapnya ⟶
+                                        </a>
                                     </div>
                                 </div>
                             </div>
