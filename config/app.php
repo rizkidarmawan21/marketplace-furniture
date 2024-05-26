@@ -27,6 +27,7 @@ return [
     */
 
     'env' => env('APP_ENV', 'production'),
+    'tunnel_test' => env('APP_TUNNEL_TEST', false),
 
     /*
     |--------------------------------------------------------------------------
