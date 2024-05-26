@@ -57,5 +57,4 @@ document.addEventListener("DOMContentLoaded", () => {
     chart02();
     chart03();
     chart04();
-    map01();
 });
