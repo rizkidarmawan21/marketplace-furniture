@@ -32,6 +32,14 @@
                                         x-bind:value="isEdit ? selectedValue.name : ''" class="!py-2 !px-3" />
                                     <x-input-error :messages="$errors->get('name')" class="mt-2" />
                                 </div>
+                                <div class="space-y-2 w-1/3">
+                                    <x-input-label for="image" value="Upload Photo" class="!text-lg" />
+                                    <img :src="selectedValue.image" width="400">
+                                    <x-text-input id="image" name="image" type="file"
+                                        placeholder="Insert File"
+                                        x-bind:value="isEdit ? selectedValue.image : ''" class="!py-2 !px-3" />
+                                    <x-input-error :messages="$errors->get('image')" class="mt-2" />
+                                </div>
                                 <div class="pt-10">
                                     <x-primary-button class="!rounded-full !py-3">
                                         <p x-text="isEdit ? 'Update' : 'Create'"></p>

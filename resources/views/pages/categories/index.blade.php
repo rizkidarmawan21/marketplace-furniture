@@ -70,7 +70,7 @@
                                             </svg>
                                         </button>
                                         <button class="hover:text-primary"
-                                            @click="isEdit = true, selectedValue = { id: '{{ $item->id }}', name: '{{ $item->name }}', email: '{{ $item->email }}' }, modalCreate = true">
+                                            @click="isEdit = true, selectedValue = { id: '{{ $item->id }}', name: '{{ $item->name }}', image: '{{ asset($item->image) }}' }, modalCreate = true">
                                             <svg class="fill-current" width="16" height="16"
                                                 xmlns="http://www.w3.org/2000/svg"
                                                 viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->

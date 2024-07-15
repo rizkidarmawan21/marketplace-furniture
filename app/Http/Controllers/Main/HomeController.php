@@ -26,6 +26,8 @@ class HomeController extends Controller
             ->limit(5)
             ->get();
 
-        return view('pages.main.home', compact('productPopular', 'productRecomendation','articles'));
+        $categories = Category::all();
+
+        return view('pages.main.home', compact('productPopular', 'productRecomendation','articles','categories'));
     }
 }
