@@ -1,3 +1,31 @@
+# Mafurion - Marketplace Furniture
+
+## Tech 
+1. Laravel 11
+2. Tailwind CSS v3
+3. Alpine JS
+4. Midtrans for payment gateway
+
+## Preview & Demo
+![image](https://github.com/user-attachments/assets/99f60969-e4bc-4219-a294-173a2984b0af)
+![image](https://github.com/user-attachments/assets/61ba8840-4bf6-4385-bd5d-f32227049221)
+![image](https://github.com/user-attachments/assets/2c546e4a-0503-4f1e-a3b8-ab5bc63d8ebb)
+![image](https://github.com/user-attachments/assets/ad8bfb14-6493-4976-a56f-cf68609d203e)
+![image](https://github.com/user-attachments/assets/80df9d09-aaa6-4284-8937-7a9a8f8f3955)
+![image](https://github.com/user-attachments/assets/39a86262-22de-440e-af15-4d8f94185b38)
+![image](https://github.com/user-attachments/assets/e958aa49-4eb0-44a6-aa50-0282f7e7f861)
+![image](https://github.com/user-attachments/assets/288c17f0-2cdd-4ee9-b7b6-aa850d7be89e)
+![image](https://github.com/user-attachments/assets/46afd905-19d9-4912-ab10-61e6a16c8935)
+![image](https://github.com/user-attachments/assets/24a9cf82-f1fa-486d-b51c-66cacee1f77e)
+![image](https://github.com/user-attachments/assets/44cdf6ae-b833-4c56-9818-55de16ede89c)
+![image](https://github.com/user-attachments/assets/71530de5-4874-4e82-b501-83844480444a)
+![image](https://github.com/user-attachments/assets/7a3501ab-8b52-4c61-9889-ee24588668ee)
+![image](https://github.com/user-attachments/assets/65641dc1-c21e-45e7-b77c-691a99c5cd49)
+![image](https://github.com/user-attachments/assets/31765aac-772b-4e15-b9ab-91d384349bb7)
+![image](https://github.com/user-attachments/assets/f79d44bb-21eb-43ed-9e35-264bf4437bda)
+
+
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
@@ -20,47 +48,5 @@ Laravel is a web application framework with expressive, elegant syntax. We belie
 - [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
 Laravel is accessible, powerful, and provides tools required for large, robust applications.
-
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
-
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
